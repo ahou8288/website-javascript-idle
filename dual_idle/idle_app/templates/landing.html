@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>landing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/a31130d7a9.js"></script>
+<!--    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}" />
+-->
+</head>
+<style>
+.bordered {
+    border: solid 3px;
+}
+input {
+    margin-bottom: 10px;
+    padding-left: 5px;
+    border: solid !important;
+    border-color: #000;
+}
+button {
+    margin-top: 10px;
+    border: solid !important;
+    border-color: #000;
+    background-color: white;
+    width: 45%;
+}
+#join_game {
+    margin: 10px;
+    padding: 20px;
+}
+</style>
+<body>
+{% block body %}
+<div style="height:10vh;"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="join_game" class="bordered">
+                <form id="join_game_form">
+                    <div class="row">
+                        <div class="col text-center">
+                            <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
+                            <label id="linking_code_label" class="label">Linking Code: </label>
+                            <input type="text" id="linking_code" class="input"
+                                placeholder="{{ default_linking_code }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                           <button type="submit" id="join_game_button" class="btn btn-default btn-sm">Join Game</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="options">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button id="create_game" class="btn btn-default btn-sm">Create New Game</button>
+                        <button id="my_games" class="btn btn-default btn-sm">My Games</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button id="leaderboard" class="btn btn-default btn-sm">Leaderboards</button>
+                        <button id="logout" class="btn btn-default btn-sm">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

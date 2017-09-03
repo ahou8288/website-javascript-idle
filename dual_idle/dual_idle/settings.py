@@ -54,7 +54,7 @@ ROOT_URLCONF = 'dual_idle.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['idle_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
