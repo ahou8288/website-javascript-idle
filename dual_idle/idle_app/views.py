@@ -20,3 +20,19 @@ def login(request):
 def sign_up(request):
     return render(request, 'sign_up.html',
                   )
+
+def game(request):
+    saved_game_state = {
+        "perks": ["snowflake",'','','',''],
+        "coins": {"username": 10,
+                  "username2": 122},
+        "items": {"username": ['calculator','mobile','desktop'],
+                  "username2": ['calculator']},
+        "tips": ["A hot tip for my Bitcoin Bro!",
+                 "Another tip...."],
+        "elapsed_time": 100,
+        "linking_code": "d8cd98f00b204e9"
+    }
+    return render(request, 'game.html',
+                  {"game_data": saved_game_state}
+                  )

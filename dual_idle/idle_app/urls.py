@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'landing', views.landing, name='landing'),
     url(r'login', views.login, name='login'),
     url(r'sign_up', views.sign_up, name='sign_up'),
+    url(r'game', views.game, name='game'),
 ]
