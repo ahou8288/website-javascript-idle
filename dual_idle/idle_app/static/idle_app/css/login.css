@@ -1,0 +1,15 @@
+input {
+    border: solid !important;
+    border-color: #000;
+}
+button {
+    border: solid !important;
+    border-color: #000;
+    background-color: white;
+}
+#login_button {
+    margin-left: 10px;
+}
+#signup {
+    margin-top: 15px;
+}
