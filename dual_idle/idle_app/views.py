@@ -10,8 +10,13 @@ def index(request):
 
 def landing(request):
     return render(request, 'landing.html', {
-        "default_linking_code": "d8cd98f00b204e9"})
+        "default_linking_code": "d8cd98f00b204e9"}
+                  )
 
 def login(request):
     return render(request, 'login.html',
+                  )
+
+def sign_up(request):
+    return render(request, 'sign_up.html',
                   )

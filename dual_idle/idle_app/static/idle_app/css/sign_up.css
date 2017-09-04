@@ -1,0 +1,10 @@
+input {
+    border: solid !important;
+    border-color: #000;
+    margin-bottom: 15px;
+}
+button {
+    border: solid !important;
+    border-color: #000;
+    background-color: white;
+}
