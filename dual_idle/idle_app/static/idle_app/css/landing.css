@@ -1,0 +1,20 @@
+.bordered {
+    border: solid 3px;
+}
+input {
+    margin-bottom: 10px;
+    padding-left: 5px;
+    border: solid !important;
+    border-color: #000;
+}
+button {
+    margin-top: 10px;
+    border: solid !important;
+    border-color: #000;
+    background-color: white;
+    width: 45%;
+}
+#join_game {
+    margin: 10px;
+    padding: 20px;
+}
