@@ -1,20 +1,20 @@
-from django.shortcuts import render
-
-# Create your views here.
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the idle index.")
+# def index(request):
+#     return HttpResponse("Hello, world. You're at the idle index.")
 
 def landing(request):
     return render(request, 'landing.html', {
         "default_linking_code": "d8cd98f00b204e9"}
                   )
 
-def login(request):
-    return render(request, 'login.html',
+def _login(request):
+    return render(request, '_login.html',
                   )
 
 def sign_up(request):
@@ -36,15 +36,6 @@ def game(request):
     return render(request, 'game.html',
                   {"game_data": saved_game_state}
                   )
-
-
-
-
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-
 
 @login_required
 def home(request):
