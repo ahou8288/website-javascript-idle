@@ -3,13 +3,22 @@ input {
     border-color: #000;
 }
 button {
-    border: solid !important;
-    border-color: #000;
-    background-color: white;
+    background-color: #422F50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }
 #login_button {
     margin-left: 10px;
 }
 #signup {
     margin-top: 15px;
+}
+
+h1 {
+    color: green;
+
 }

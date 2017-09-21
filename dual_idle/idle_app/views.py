@@ -1,32 +1,55 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.contrib.auth.forms import AuthenticationForm, authenticate
+from django.contrib.auth import logout
+from idle_app.forms import RegistrationForm
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
-
-# def index(request):
-#     return HttpResponse("Hello, world. You're at the idle index.")
 
 def landing(request):
-    return render(request, 'landing.html', {
-        "default_linking_code": "d8cd98f00b204e9"}
-                  )
+    if request.user.is_authenticated:
+        return render(request, 'landing.html', {
+            "default_linking_code": "d8cd98f00b204e9"})
+    else:
+        return HttpResponseRedirect('login')
 
-def _login(request):
-    return render(request, '_login.html',
-                  )
 
-def sign_up(request):
-    return render(request, 'sign_up.html',
-                  )
+def login_view(request):
+    if request.user.is_authenticated:
+        return render(request, 'landing.html', )
+
+    if request.method == 'GET':
+        form = AuthenticationForm()
+        return render(request, '_login.html', {'form': form})
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                print(user)
+                return render(request, 'landing.html', )
+            else:
+                print('User not found')
+        else:
+            # If there were errors, we render the form with these
+            # errors
+            return render(request, '_login.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, '_logout.html')
+
 
 def game(request):
     saved_game_state = {
-        "perks": ["snowflake",'','','',''],
+        "perks": ["snowflake", '', '', '', ''],
         "coins": {"username": 10,
                   "username2": 122},
-        "items": {"username": ['calculator','mobile','desktop'],
+        "items": {"username": ['calculator', 'mobile', 'desktop'],
                   "username2": ['calculator']},
         "tips": ["A hot tip for my Bitcoin Bro!",
                  "Another tip...."],
@@ -37,21 +60,13 @@ def game(request):
                   {"game_data": saved_game_state}
                   )
 
-@login_required
-def home(request):
-    return render(request, 'home.html')
-
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
+            return HttpResponseRedirect('/idle_app/landing/')
     else:
-        form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+        form = RegistrationForm()
+    return render(request, 'sign_up.html', {'form': form})

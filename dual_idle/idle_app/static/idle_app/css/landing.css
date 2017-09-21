@@ -8,13 +8,29 @@ input {
     border-color: #000;
 }
 button {
-    margin-top: 10px;
-    border: solid !important;
-    border-color: #000;
-    background-color: white;
-    width: 45%;
+    background-color: #422F50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
 }
 #join_game {
     margin: 10px;
     padding: 20px;
+}
+
+h1 {
+    color: green;
+}
+
+a.button {
+    background-color: #422F50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
 }

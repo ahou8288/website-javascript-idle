@@ -4,7 +4,16 @@ input {
     margin-bottom: 15px;
 }
 button {
-    border: solid !important;
-    border-color: #000;
-    background-color: white;
+    background-color: #422F50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+h1 {
+    color: green;
+
 }

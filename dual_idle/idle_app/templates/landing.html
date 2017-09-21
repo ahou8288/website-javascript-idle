@@ -4,52 +4,60 @@
     <meta charset="UTF-8">
     <title>Landing</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/landing.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/landing.css' %}"/>
 </head>
 <body>
 {% block body %}
-<div style="height:10vh;"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div id="join_game" class="bordered">
-                <form id="join_game_form">
-                    <div class="row">
-                        <div class="col text-center">
-                            <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
-                            <label id="linking_code_label" class="label">Linking Code: </label>
-                            <input type="text" id="linking_code" class="input"
-                                placeholder="{{ default_linking_code }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col text-center">
-                           <button type="submit" id="join_game_button" class="btn btn-default btn-sm">Join Game</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div id="options">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <button id="create_game" class="btn btn-default btn-sm">Create New Game</button>
-                        <button id="my_games" class="btn btn-default btn-sm">My Games</button>
-                    </div>
+    <div style="height:10vh;"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="jumbotron text-center">
+                    <h1>BitCoin Bros</h1>
+                    <p>Welcome Back! </p>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <button id="leaderboard" class="btn btn-default btn-sm">Leaderboards</button>
-                        <button id="logout" class="btn btn-default btn-sm">Logout</button>
+                <div id="join_game" class="bordered">
+                    <form id="join_game_form">
+                        <div class="row">
+                            <div class="col text-center">
+                                <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
+                                <label id="linking_code_label" class="label">Linking Code: </label>
+                                <input type="text" id="linking_code" class="input"
+                                       placeholder="{{ default_linking_code }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" id="join_game_button" class="btn btn-default btn-sm">Join Game
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="options">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button id="create_game" class="btn btn-default btn-sm">Create New Game</button>
+                            <button id="my_games" class="btn btn-default btn-sm">My Games</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+
+                            <button id="leaderboard" class="btn btn-default btn-sm">Leaderboards</button>
+                            <form action="/idle_app/logout">
+                                <button id="logout" class="btn btn-default btn-sm">Logout</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 </body>
 </html>

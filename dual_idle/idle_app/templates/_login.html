@@ -4,47 +4,63 @@
     <meta charset="UTF-8">
     <title>Login</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/login.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/login.css' %}"/>
 </head>
 <body>
 {% block body %}
-<div style="height:10vh;"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <form id="login_form">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <div class="input-group input-group-lg">
-                                <label id="username_label" class="col-md-3"><strong>Username</strong></label>
-                                <input type="text" id="username" class="input-group-lg col-md-5" value="">
+    <div style="height:10vh;"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <div class="jumbotron text-center">
+                            <h1>BitCoin Bros</h1>
+                            <p>The best Dual Idle Game on the internets</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <label class="col-md-3"
+                                               for="{{ form.username.id_for_label }}"><strong>Username</strong></label>
+                                        {{ form.username }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="input-group input-group-lg">
+                                    <label class="col-md-3"
+                                           for="{{ form.password.id_for_label }}"><strong>Password</strong></label>
+                                    {{ form.password }}
+                                    <button id="login_button" class="btn btn-default btn-sm col-md-3">
+                                        Login
+                                    </button>
+                                </div>
+                                {{ form.password.errors }}
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="input-group input-group-lg">
-                            <label id="password_label" class="col-md-3"><strong>Password</strong></label>
-                            <input type="password" id="password" class="input-sm col-md-5" value="">
-                            <button type="submit" id="login_button" class="btn btn-default btn-sm col-md-3">Login</button>
+                </form>
+                <form action="/idle_app/signup/">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label id="signup_label" class="col-md-3"><strong>New User</strong></label>
+                            <button id="sign_up_button" class="btn btn-default btn-sm col-md-3">Sign Up
+                            </button>
                         </div>
                     </div>
-                </div>
-            </form>
-            <div class="row">
-                <div class="col-md-12">
-                    <label id="signup_label" class="col-md-3"><strong>New User</strong></label>
-                    <button type="button" id="sign_up" class="btn btn-default btn-sm col-md-3">Sign Up</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 </body>
 </html>
