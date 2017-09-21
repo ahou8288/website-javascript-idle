@@ -1,0 +1,6 @@
+.idea/*
+*.pyc
+.DStore
+.DS_Store
+__pycache__
+dual_idle/.idea/*
