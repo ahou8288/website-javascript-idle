@@ -1,16 +1,18 @@
 from django.contrib.auth.forms import AuthenticationForm, authenticate
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from idle_app.forms import RegistrationForm
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 
 def landing(request):
+    print(request.user)
     if request.user.is_authenticated:
+
         return render(request, 'landing.html', {
             "default_linking_code": "d8cd98f00b204e9"})
     else:
-        return HttpResponseRedirect('login')
+        return HttpResponseRedirect('/idle_app/login')
 
 
 def login_view(request):
@@ -66,6 +68,10 @@ def signup(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
             return HttpResponseRedirect('/idle_app/landing/')
     else:
         form = RegistrationForm()
