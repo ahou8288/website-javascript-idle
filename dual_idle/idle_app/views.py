@@ -3,10 +3,14 @@ from django.contrib.auth import logout, authenticate, login
 from idle_app.forms import RegistrationForm
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from idle_app import game_api as api
 
 
 def landing(request):
-    print(request.user)
+    """
+    api.create_game(request) Returns a UserGame
+    object for implementing the create game button
+    """
     if request.user.is_authenticated:
 
         return render(request, 'landing.html', {
