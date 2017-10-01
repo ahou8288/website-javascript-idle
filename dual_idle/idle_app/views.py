@@ -1,9 +1,10 @@
 from django.contrib.auth.forms import AuthenticationForm, authenticate
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate, login, get_user
 from idle_app.forms import RegistrationForm
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from idle_app import game_api as api
+from django.contrib.auth.models import User
 
 
 def landing(request):
@@ -11,8 +12,8 @@ def landing(request):
     api.create_game(request) Returns a UserGame
     object for implementing the create game button
     """
-    if request.user.is_authenticated:
 
+    if request.user.is_authenticated:
         return render(request, 'landing.html', {
             "default_linking_code": "d8cd98f00b204e9"})
     else:
@@ -35,7 +36,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
 
             if user is not None:
-                print(user)
+                login(request, user)
                 return render(request, 'landing.html', )
             else:
                 print('User not found')
