@@ -12,7 +12,6 @@ def landing(request):
     api.create_game(request) Returns a UserGame
     object for implementing the create game button
     """
-
     if request.user.is_authenticated:
         return render(request, 'landing.html', {
             "default_linking_code": "d8cd98f00b204e9"})
@@ -37,7 +36,7 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                return render(request, 'landing.html', )
+                return HttpResponseRedirect('/idle_app/landing')
             else:
                 print('User not found')
         else:
