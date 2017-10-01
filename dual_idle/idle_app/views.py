@@ -4,7 +4,7 @@ from idle_app.forms import RegistrationForm
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from idle_app import game_api as api
-from django.contrib.auth.models import User
+from idle_app.models import UserGame
 
 
 def landing(request):
@@ -13,8 +13,9 @@ def landing(request):
     object for implementing the create game button
     """
     if request.user.is_authenticated:
+        last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
         return render(request, 'landing.html', {
-            "default_linking_code": "d8cd98f00b204e9"})
+            "default_linking_code": last_game.linkingCode})
     else:
         return HttpResponseRedirect('/idle_app/login')
 

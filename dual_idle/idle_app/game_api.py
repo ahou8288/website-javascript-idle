@@ -20,6 +20,7 @@ def create_game(request):
         wealth=0,
     )
     userGame.save()
+    print(userGame.game)
     if request.META['CONTENT_TYPE'] == 'json':
         # In case of restful json api endpoint
         return JSON.encode(userGame)
