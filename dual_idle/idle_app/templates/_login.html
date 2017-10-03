@@ -44,7 +44,13 @@
                                         Login
                                     </button>
                                 </div>
-                                {{ form.password.errors }}
+                                {% if form.non_field_errors %}
+                                    <ul class='form-errors'>
+                                        {% for error in form.non_field_errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
