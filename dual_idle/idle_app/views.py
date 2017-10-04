@@ -13,9 +13,14 @@ def landing(request):
     object for implementing the create game button
     """
     if request.user.is_authenticated:
-        last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
+        last_game = None
+        try:
+
+            last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
+        except Exception:
+            pass
         return render(request, 'landing.html', {
-            "default_linking_code": last_game.linkingCode})
+            "default_linking_code": last_game.linkingCode if last_game.linkingCode else "sb34b34jhb35hbk35"})
     else:
         return HttpResponseRedirect('/idle_app/login')
 
@@ -34,12 +39,13 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-
             if user is not None:
+                print(user, request)
                 login(request, user)
-                return HttpResponseRedirect('/idle_app/landing')
+                return HttpResponseRedirect('/idle_app/landing/')
             else:
                 print('User not found')
+                return render(request, '_login.html', {'form': form})
         else:
             # If there were errors, we render the form with these
             # errors
