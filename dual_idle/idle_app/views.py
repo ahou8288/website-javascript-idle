@@ -13,9 +13,9 @@ def landing(request):
     object for implementing the create game button
     """
     if request.user.is_authenticated:
-        last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
+        # last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
         return render(request, 'landing.html', {
-            "default_linking_code": last_game.linkingCode})
+            "default_linking_code": ''})
     else:
         return HttpResponseRedirect('/idle_app/login')
 
@@ -63,13 +63,15 @@ def game(request, linkingCode):
         me = UserGame.objects.filter(game=the_game)
 
     my_stuff = PlayerItem.objects.filter(game=the_game).filter(user=current_user)
+    possible_items = list(Item.objects.all())
 
     game_data = {
         "game": the_game,
         "me": me,
         "my_stuff": my_stuff,
         "partner": partner,
-        "partners_stuff": partners_stuff
+        "partners_stuff": partners_stuff,
+        "possible_items": possible_items
     }
     saved_game_state = {
         "perks": ["snowflake", '', '', '', ''],

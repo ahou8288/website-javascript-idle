@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from . import views
-
+from . import game_api
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 
@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^login/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^game_state/$', game_api.update_user_game, name='game_state'),
 ]
