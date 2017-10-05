@@ -37,6 +37,7 @@ class Game(models.Model):
 class PlayerItem(models.Model):
     user = models.ForeignKey(User)
     game = models.ForeignKey(Game)
+    item = models.ForeignKey(Item)
     quantity = models.IntegerField()
     upgradeQuantity = models.IntegerField()
 
@@ -44,5 +45,6 @@ class UserGame(models.Model):
     user = models.ForeignKey(User)
     game = models.ForeignKey(Game)
     wealth = models.BigIntegerField()
+    mined = models.BigIntegerField(default=0)
     timePlayed = models.DurationField(
         default=timedelta(seconds=0))
