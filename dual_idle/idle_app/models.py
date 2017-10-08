@@ -28,6 +28,12 @@ class Item(models.Model):
     displayImagePath = models.URLField()
     baseValue = models.IntegerField()
     upgradeValue = models.IntegerField()
+    def __todict__(self):
+        return {
+            "name": self.name,
+            "baseValue": self.baseValue,
+            "upgradeValue": self.upgradeValue
+        }
 
 class Game(models.Model):
     creationDate = models.DateField()
@@ -41,6 +47,7 @@ class PlayerItem(models.Model):
     quantity = models.IntegerField()
     upgradeQuantity = models.IntegerField()
 
+
 class UserGame(models.Model):
     user = models.ForeignKey(User)
     game = models.ForeignKey(Game)
@@ -48,3 +55,15 @@ class UserGame(models.Model):
     mined = models.BigIntegerField(default=0)
     timePlayed = models.DurationField(
         default=timedelta(seconds=0))
+    def __todict__(self):
+        return {
+            "user": {
+                "id": self.user.id
+            },
+            "game": {
+                "id": self.game.id
+            },
+            "wealth": self.wealth,
+            "mined": self.mined,
+            "timePlayed": self.timePlayed.seconds
+        }
