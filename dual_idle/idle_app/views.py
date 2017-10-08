@@ -2,10 +2,15 @@ from django.contrib.auth.forms import AuthenticationForm, authenticate
 from django.contrib.auth import logout, authenticate, login, get_user
 from idle_app.forms import RegistrationForm
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from idle_app import game_api as api
 from idle_app.models import UserGame, Game, PlayerItem, Item
+import json
 
+# from django.contrib.auth.decorators import login_required
+# from django.contrib.auth import login, authenticate
+# from django.contrib.auth.forms import UserCreationForm
+# from django.shortcuts import render, redirect
 
 def landing(request):
     """
@@ -79,7 +84,7 @@ def game(request, linkingCode):
         "possible_items": possible_items
     }
     saved_game_state = {
-        "perks": ["snowflake", '', '', '', ''],
+        "perks": ["snowflake", '', ''],
         "coins": {"username": 10,
                   "username2": 122},
         "items": {"username": ['calculator', 'mobile', 'desktop'],
@@ -91,8 +96,19 @@ def game(request, linkingCode):
     }
     return render(request, 'game.html',
                   {"game_data": saved_game_state,
-                   "saved_game": game_data}
+                   # "saved_game": game_data
+                   }
                   )
+
+
+def posttest(request):
+    print('Post received.')
+    if request.method == 'POST':
+        data=json.loads(request.POST.get("data", "0"))
+        print(data)
+        for i in data:
+            print(i, data[i])
+        return HttpResponse(json.dumps('test_response_info'), content_type='application/json')
 
 
 def signup(request):
