@@ -115,13 +115,14 @@ def update(request):
             print("Too many users in this game!")
         partner = partner[0].user
         partnerUserGame = models.UserGame.objects.get(user=partner, game=game)
+        partnerUserGame.__todict__()
         partnerItems = update_players_items(g_o, game, partner, 'partnerItems')
 
     """
         The response object body:
     """
     response_object = {
-        "partnerUserGame": partnerUserGame.__todict__(),
+        "partnerUserGame": partnerUserGame,
         "partnerItems": partnerItems,
     }
     print(response_object)
