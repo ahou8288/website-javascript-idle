@@ -6,12 +6,10 @@ input {
 }
 .bordered {
     border: solid 3px;
+    border-radius: 10px;
 }
 ul {
     list-style: none;
-}
-li {
-    margin-top: 3px;
 }
 h5 {
     display: inline;
@@ -19,8 +17,11 @@ h5 {
 .stat {
     margin-top: 4px;
 }
-.btm-div {
-    margin-top: 10px;
+.side-div {
+    position: relative;
+    top: 2vh;
+    height: 100%;
+}
 }
 .circled {
     border: solid;
@@ -43,6 +44,7 @@ h5 {
     height: 45vh;
 }
 .btm-div {
+    margin-top: 10px;
     top: 4vh;
     height: 100%;
 }
@@ -55,10 +57,21 @@ h2 {
 h3 {
     margin-top: 15px;
 }
-.stat {
-    margin: 15px;
-}
 .item {
-    margin: 10px;
-    padding: 5px;
+    margin: 5px;
+    height: 36px;
+}
+ul {
+    padding: 0px;
+}
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.btn {
+    border-radius: 7px;
+}
+.pad {
+    margin: 2px;
 }

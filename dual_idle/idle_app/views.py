@@ -5,7 +5,13 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from idle_app import game_api as api
 from idle_app.models import UserGame, Game, PlayerItem, Item
+import json
 
+# from django.contrib.auth.decorators import login_required
+# from django.contrib.auth import login, authenticate
+# from django.contrib.auth.forms import UserCreationForm
+# from django.shortcuts import render, redirect
+# from django.http import HttpResponse
 
 def landing(request):
     """
@@ -59,24 +65,24 @@ def logout_view(request):
 
 def game(request, linkingCode):
     current_user = get_user(request)
-    the_game = Game.objects.get(linkingCode=linkingCode)
-    me,partner,partners_stuff = None,None,None
-    try: #  and see if we have a partner yet
-        partner = UserGame.objects.filter(game=the_game).exclude(user=current_user)
-        partners_stuff = PlayerItem.objects.filter({'game':the_game,'user':partner.user})
-        me = UserGame.objects.filter(game=the_game).exclude(user=partner.user)
-    except Exception:
-        me = UserGame.objects.filter(game=the_game)
+    # the_game = Game.objects.get(linkingCode=linkingCode)
+    # me,partner,partners_stuff = None,None,None
+    # try: #  and see if we have a partner yet
+    #     partner = UserGame.objects.filter(game=the_game).exclude(user=current_user)
+    #     partners_stuff = PlayerItem.objects.filter({'game':the_game,'user':partner.user})
+    #     me = UserGame.objects.filter(game=the_game).exclude(user=partner.user)
+    # except Exception:
+    #     me = UserGame.objects.filter(game=the_game)
 
-    my_stuff = PlayerItem.objects.filter(game=the_game).filter(user=current_user)
+    # my_stuff = PlayerItem.objects.filter(game=the_game).filter(user=current_user)
 
-    game_data = {
-        "game": the_game,
-        "me": me,
-        "my_stuff": my_stuff,
-        "partner": partner,
-        "partners_stuff": partners_stuff
-    }
+    # game_data = {
+    #     "game": the_game,
+    #     "me": me,
+    #     "my_stuff": my_stuff,
+    #     "partner": partner,
+    #     "partners_stuff": partners_stuff
+    # }
     saved_game_state = {
         "perks": ["snowflake", '', '', '', ''],
         "coins": {"username": 10,
@@ -90,7 +96,8 @@ def game(request, linkingCode):
     }
     return render(request, 'game.html',
                   {"game_data": saved_game_state,
-                   "saved_game": game_data}
+                   # "saved_game": game_data
+                   }
                   )
 
 
