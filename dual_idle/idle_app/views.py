@@ -63,7 +63,22 @@ def logout_view(request):
 
 def game(request, linkingCode):
     current_user = get_user(request)
-    the_game = Game.objects.get(linkingCode=linkingCode)
+    if current_user.is_anonymous:
+        return HttpResponseRedirect('/idle_app/login/')
+    try:
+        the_game = Game.objects.get(linkingCode=linkingCode)
+        try:
+            userGame = UserGame.objects.get(game=the_game, user=current_user)
+        except Exception:
+            userGame = UserGame(
+                            user=current_user,
+                            game=the_game,
+                            wealth=0,
+                        )
+            userGame.save()
+    except Exception:
+        userGame = api.create_game(request)
+        the_game = userGame.game
     me,partner,partners_stuff = None,None,None
     try: #  and see if we have a partner yet
         partner = UserGame.objects.filter(game=the_game).exclude(user=current_user)
@@ -81,7 +96,7 @@ def game(request, linkingCode):
         "my_stuff": my_stuff,
         "partner": partner,
         "partners_stuff": partners_stuff,
-        "possible_items": possible_items
+        "possible_items": possible_items,
     }
     saved_game_state = {
         "perks": ["snowflake", '', ''],
@@ -92,11 +107,11 @@ def game(request, linkingCode):
         "tips": ["A hot tip for my Bitcoin Bro!",
                  "Another tip...."],
         "elapsed_time": 100,
-        "linking_code": "d8cd98f00b204e9"
+        "linking_code": the_game.linkingCode
     }
     return render(request, 'game.html',
                   {"game_data": saved_game_state,
-                   # "saved_game": game_data
+                    "saved_game": game_data
                    }
                   )
 
