@@ -64,7 +64,7 @@ def logout_view(request):
 
 
 def game(request, linkingCode):
-    current_user = get_user(request)
+    # current_user = get_user(request)
     # the_game = Game.objects.get(linkingCode=linkingCode)
     # me,partner,partners_stuff = None,None,None
     # try: #  and see if we have a partner yet
@@ -99,6 +99,16 @@ def game(request, linkingCode):
                    # "saved_game": game_data
                    }
                   )
+
+
+def posttest(request):
+    print('Post received.')
+    if request.method == 'POST':
+        data=json.loads(request.POST.get("data", "0"))
+        print(data)
+        for i in data:
+            print(i, data[i])
+        return HttpResponse(json.dumps('test_response_info'), content_type='application/json')
 
 
 def signup(request):

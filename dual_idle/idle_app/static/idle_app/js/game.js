@@ -193,22 +193,25 @@ ko.applyBindings(new AppViewModel());
 // Exposes a link for debugging purposes
 var vm = ko.dataFor(document.body);
 
+// This function sends data to the server
+// When the game is running it will be called periodically
+// For now it just runs at game startup only
 sendData();
 
 function sendData(){
 	//Send a post with everything
+	console.log('sending post')
 	var jsonString = JSON.stringify(getGameData());
 	$.ajax({
 		type: "POST",
-		url: 'posttest',
+		url: '',
 		data: {data: jsonString, csrfmiddlewaretoken: getCookie('csrftoken')},
 		success: function(result) {
-			window.console.log(result);
+			// Result was confusing
+			// window.console.log(result);
 		}
 	});
 }
-
-// getGameData();
 
 function getGameData(){
 	outValue={
@@ -250,7 +253,7 @@ function getGameData(){
 			'upgradeQuantity':partnerItems[i].upgrades
 		});
 	}
-	console.log(outValue);
+	// console.log(outValue);
 	return outValue;
 };
 
