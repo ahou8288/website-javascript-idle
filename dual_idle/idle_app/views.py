@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm, authenticate
 from django.contrib.auth import logout, authenticate, login, get_user
 from idle_app.forms import RegistrationForm
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from idle_app import game_api as api
 from idle_app.models import UserGame, Game, PlayerItem, Item
 import json
@@ -11,7 +11,6 @@ import json
 # from django.contrib.auth import login, authenticate
 # from django.contrib.auth.forms import UserCreationForm
 # from django.shortcuts import render, redirect
-# from django.http import HttpResponse
 
 def landing(request):
     """
@@ -84,7 +83,7 @@ def game(request, linkingCode):
     #     "partners_stuff": partners_stuff
     # }
     saved_game_state = {
-        "perks": ["snowflake", '', '', '', ''],
+        "perks": ["snowflake", '', ''],
         "coins": {"username": 10,
                   "username2": 122},
         "items": {"username": ['calculator', 'mobile', 'desktop'],

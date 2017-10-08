@@ -204,7 +204,7 @@ function sendData(){
 	var jsonString = JSON.stringify(getGameData());
 	$.ajax({
 		type: "POST",
-		url: '',
+		url: 'posttest',
 		data: {data: jsonString, csrfmiddlewaretoken: getCookie('csrftoken')},
 		success: function(result) {
 			// Result was confusing
