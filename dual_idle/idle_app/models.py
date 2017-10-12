@@ -36,6 +36,8 @@ class Item(models.Model):
         }
 
 class Game(models.Model):
+    player = models.ForeignKey(User)
+    partner = models.ForeignKey(User)
     creationDate = models.DateField()
     linkingCode = models.CharField(max_length=33)
     isPublic = models.BooleanField()
