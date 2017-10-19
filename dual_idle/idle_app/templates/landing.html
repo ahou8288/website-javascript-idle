@@ -11,7 +11,7 @@
 
 <script>
     function linkCode() {
-        var linkingCode = document.getElementById('linking_Code_Value').value;
+        var linkingCode = document.getElementById('linkingCode_Value').value;
         var url = "/idle_app/game/" + linkingCode;
         window.open(url)
     }
@@ -34,7 +34,7 @@
                             <div class="col text-center">
                                 <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
                                 <label id="linking_code_label" class="label">Linking Code: </label>
-                                <input type="text" id="linking_Code_Value" class="input" value="{{ default_linking_code }}"
+                                <input type="text" id="linkingCode_Value" class="input" value="{{ default_linking_code }}"
                                 >
                                 </input>
                             </div>
