@@ -26,7 +26,7 @@ def landing(request):
             except Exception:
                 pass
             return render(request, 'landing.html', {
-                "default_linking_code":  "sb34b34jhb35hbk35"})
+                "default_linking_code":  "Enter Linking Code!"})
 
     else:
         return HttpResponseRedirect('/idle_app/login')
@@ -34,7 +34,7 @@ def landing(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return render(request, 'landing.html', )
+        return HttpResponseRedirect('/idle_app/landing/')
 
     if request.method == 'GET':
         form = AuthenticationForm()
