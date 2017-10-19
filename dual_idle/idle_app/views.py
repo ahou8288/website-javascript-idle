@@ -18,13 +18,17 @@ def landing(request):
     object for implementing the create game button
     """
     if request.user.is_authenticated:
-        last_game = None
-        try:
-            last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
-        except Exception:
-            pass
-        return render(request, 'landing.html', {
-            "default_linking_code":  "sb34b34jhb35hbk35"})
+        if request.method =='GET':
+            last_game = None
+            try:
+                last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
+            except Exception:
+                pass
+            return render(request, 'landing.html', {
+                "default_linking_code":  "sb34b34jhb35hbk35"})
+
+        if request.method == 'POST':
+            
     else:
         return HttpResponseRedirect('/idle_app/login')
 

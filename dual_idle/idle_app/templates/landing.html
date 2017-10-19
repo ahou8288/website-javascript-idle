@@ -8,6 +8,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/landing.css' %}"/>
 </head>
+
+<script>
+    function linkCode() {
+        var linkingCode = document.getElementById('linking_Code_Val').value;
+        var url = "/idle_app/game/" + linkingCode;
+        window.open(url)
+    }
+</script>
+
 <body>
 {% block body %}
     <div style="height:10vh;"></div>
@@ -17,25 +26,28 @@
             <div class="col-md-6">
                 <div class="jumbotron text-center">
                     <h1>BitCoin Bros</h1>
+                    <p>{{ request.game.username }}</p>
                     <p>Welcome Back! </p>
                 </div>
                 <div id="join_game" class="bordered">
-                     <form method="post" action="{% url 'game' linkingCode="16cf280a46fb8890a113c7a8a3339cd33b061b7a" %}" >{% csrf_token %}
                         <div class="row">
                             <div class="col text-center">
                                 <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
                                 <label id="linking_code_label" class="label">Linking Code: </label>
-                                <input type="text" id="linking_code" class="input" value="{{ default_linking_code }}">
+                                <input type="text" id="linking_Code_Val" class="input" value="{{ default_linking_code }}"
+                                >
                                 </input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col text-center">
-                                <button id="join_game_button" class="btn btn-default btn-sm">Join Game
+                                <form action="" method="get">
+                                <button id="join_game_button" class="btn btn-default btn-sm" onclick="linkCode()"
+                                >Join Game
                                 </button>
+                                </form>
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div id="options">
                     <div class="row">
