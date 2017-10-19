@@ -74,10 +74,8 @@ def update(request):
     user=None
     try:
         user = get_user(request)
-        print("user got from request")
     except Exception:
         user = models.User.get(id=g_o.get('userGame')['user']['id'])
-        print("user got from post body")
     finally:
         if not user:
             user = models.UserProfile.objects.get(id=g_o.get('userGame')['user']['id'])
@@ -98,7 +96,8 @@ def update(request):
                             content_type='application/json')
 
     try:
-        print("trying to get usergame for: id=%d"%user.id)
+        print("trying to get usergame for: id=%d and game id: %d"%(user.id,game.id))
+
         myUserGame = models.UserGame.objects.get(game=game, user=user)
         myUserGame.wealth = g_o.get('userGame')['wealth']
         myUserGame.mined = g_o.get('userGame')['mined']
@@ -127,7 +126,7 @@ def update(request):
         The response object body:
     """
     response_object = {
-        "partnerUserGame": partnerUserGame,
+        "partnerUserGame": partnerUserGame.__todict__(),
         "partnerItems": partnerItems,
     }
     print(response_object)

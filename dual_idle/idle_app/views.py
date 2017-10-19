@@ -64,16 +64,13 @@ def logout_view(request):
 
 def game(request, linkingCode):
     current_user = get_user(request)
-    print("the user id=%d"%current_user.id)
     if current_user.is_anonymous:
         return HttpResponseRedirect('/idle_app/login/')
     try:
         the_game = Game.objects.get(linkingCode=linkingCode)
-        print("found game")
         try:
             userGame = UserGame.objects.get(game=the_game, user=current_user)
         except Exception:
-            print("did not find user in this game yet")
             userGame = UserGame(
                             user=current_user,
                             game=the_game,

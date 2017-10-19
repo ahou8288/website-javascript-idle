@@ -218,11 +218,11 @@ function getGameData(){
 		"userGame": {
 			"user": {
 				"displayName": vm.player.get("name")(),
-				"id": vm.player.get("id")(),
+				"id": vm.player.get("id")(), // Where is the vm.player.set() ???? this needs to be the value from the initial view render
 			},
 			"wealth": vm.player.get("money")(),
 			"game": {
-				"id": 1 //TODO
+				"id": 2 //TODO this one is important
 			},
 			"mined": vm.player.get("minned")(),
 			"timePlayed": 0, //TODO
