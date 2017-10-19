@@ -20,18 +20,18 @@
                     <p>Welcome Back! </p>
                 </div>
                 <div id="join_game" class="bordered">
-                    <form id="join_game_form">
+                     <form method="post" action="{% url 'game' linkingCode="16cf280a46fb8890a113c7a8a3339cd33b061b7a" %}" >{% csrf_token %}
                         <div class="row">
                             <div class="col text-center">
                                 <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
                                 <label id="linking_code_label" class="label">Linking Code: </label>
-                                <input type="text" id="linking_code" class="input"
-                                       placeholder="{{ default_linking_code }}">
+                                <input type="text" id="linking_code" class="input" value="{{ default_linking_code }}">
+                                </input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col text-center">
-                                <button type="submit" id="join_game_button" class="btn btn-default btn-sm">Join Game
+                                <button id="join_game_button" class="btn btn-default btn-sm">Join Game
                                 </button>
                             </div>
                         </div>
@@ -40,7 +40,9 @@
                 <div id="options">
                     <div class="row">
                         <div class="col-md-12 text-center">
+                            <form action="/idle_app/game/new">
                             <button id="create_game" class="btn btn-default btn-sm">Create New Game</button>
+                            </form>
                             <button id="my_games" class="btn btn-default btn-sm">My Games</button>
                         </div>
                     </div>
