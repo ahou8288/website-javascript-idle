@@ -11,7 +11,9 @@ def create_game(request):
     game_id_str = "%s%d"%(user.email,datetime.now().microsecond)
     link_code = hashlib.sha1(game_id_str.encode('utf-8')).hexdigest()
     game = models.Game(
-        creationDate="1970-06-06",
+        player = user,
+        partner = None,
+        creationDate=datetime.now(),
         linkingCode=link_code,
         isPublic=True,
     )
@@ -94,6 +96,8 @@ def update(request):
                             content_type='application/json')
 
     try:
+        print("trying to get usergame for: id=%d and game id: %d"%(user.id,game.id))
+
         myUserGame = models.UserGame.objects.get(game=game, user=user)
         myUserGame.wealth = g_o.get('userGame')['wealth']
         myUserGame.mined = g_o.get('userGame')['mined']
@@ -122,7 +126,7 @@ def update(request):
         The response object body:
     """
     response_object = {
-        "partnerUserGame": partnerUserGame,
+        "partnerUserGame": partnerUserGame.__todict__(),
         "partnerItems": partnerItems,
     }
     print(response_object)

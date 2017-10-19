@@ -17,6 +17,7 @@ def landing(request):
     api.create_game(request) Returns a UserGame
     object for implementing the create game button
     """
+    print(api.create_game(request))
     if request.user.is_authenticated:
         if request.method =='GET':
             last_game = None
