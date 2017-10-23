@@ -3,7 +3,7 @@ input {
     border-color: #000;
 }
 button {
-    background-color: #422F50;
+    background-color: #3e0807;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -12,13 +12,44 @@ button {
     width: 100%;
 }
 #login_button {
-    margin-left: 10px;
+    margin: 0 auto;
+    padding: 5px 50px;
+    font-size: 16px;
 }
 #signup {
-    margin-top: 15px;
+    margin: 0 auto;
+    padding: 5px 50px;
+    font-size: 16px;
 }
 
 h1 {
-    color: green;
+    color: orangered;
+}
 
+h2{
+    margin: 0 auto;
+    padding: 20px 20px;
+}
+
+.mainBanner{
+    margin: 5px;
+    padding: 20px;
+}
+
+.mainBox{
+    background: rgba(54, 25, 25, .4);
+}
+
+
+.login{
+    text-align: center;
+    margin: 0 auto;
+
+}
+
+#bg{
+    background-size: 1920px 1080px;
+    background-repeat: repeat;
+    background-position: top;
+    background-attachment: fixed;
 }

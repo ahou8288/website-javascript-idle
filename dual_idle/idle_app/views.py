@@ -7,6 +7,7 @@ from idle_app import game_api as api
 from idle_app.models import UserGame, Game, PlayerItem, Item
 import json
 
+
 # from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import login, authenticate
 # from django.contrib.auth.forms import UserCreationForm
@@ -17,16 +18,17 @@ def landing(request):
     api.create_game(request) Returns a UserGame
     object for implementing the create game button
     """
-    print(api.create_game(request))
+
     if request.user.is_authenticated:
-        if request.method =='GET':
+        print(api.create_game(request))
+        if request.method == 'GET':
             last_game = None
             try:
                 last_game = UserGame.objects.filter(user=get_user(request)).reverse()[0].game
             except Exception:
                 pass
             return render(request, 'landing.html', {
-                "default_linking_code":  "Enter Linking Code!"})
+                "default_linking_code": "Enter Linking Code!"})
 
     else:
         return HttpResponseRedirect('/idle_app/login')
@@ -74,18 +76,18 @@ def game(request, linkingCode):
             userGame = UserGame.objects.get(game=the_game, user=current_user)
         except Exception:
             userGame = UserGame(
-                            user=current_user,
-                            game=the_game,
-                            wealth=0,
-                        )
+                user=current_user,
+                game=the_game,
+                wealth=0,
+            )
             userGame.save()
     except Exception:
         userGame = api.create_game(request)
         the_game = userGame.game
-    me,partner,partners_stuff = None,None,None
-    try: #  and see if we have a partner yet
+    me, partner, partners_stuff = None, None, None
+    try:  # and see if we have a partner yet
         partner = UserGame.objects.filter(game=the_game).exclude(user=current_user)
-        partners_stuff = PlayerItem.objects.filter({'game':the_game,'user':partner.user})
+        partners_stuff = PlayerItem.objects.filter({'game': the_game, 'user': partner.user})
         me = UserGame.objects.filter(game=the_game).exclude(user=partner.user)
     except Exception:
         me = UserGame.objects.filter(game=the_game)
@@ -114,7 +116,7 @@ def game(request, linkingCode):
     }
     return render(request, 'game.html',
                   {"game_data": saved_game_state,
-                    "saved_game": game_data
+                   "saved_game": game_data
                    }
                   )
 
@@ -122,7 +124,7 @@ def game(request, linkingCode):
 def posttest(request):
     print('Post received.')
     if request.method == 'POST':
-        data=json.loads(request.POST.get("data", "0"))
+        data = json.loads(request.POST.get("data", "0"))
         print(data)
         for i in data:
             print(i, data[i])
