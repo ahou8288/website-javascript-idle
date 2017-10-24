@@ -6,26 +6,30 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/login.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/logout.css' %}"/>
 </head>
-<body>
+
+<body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
+{% load static %}
 {% block body %}
     <div style="height:10vh;"></div>
     <div class="container">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="jumbotron text-center">
-                        <h1>BitCoin Bros</h1>
-                        <p>Now Logged Out!</p>
+        <div class="container text-center">
+            <div class="form-group">
+                <div class="mainBox">
+                    <div class="mainBanner text-center">
+                        <img src="{% static "idle_app/img/BBros_logo.png" %}" alt="BBros Logo" width="400"
+                             height="200"/>
                     </div>
                 </div>
-                <div>
-                    <form action="/idle_app/login">
-                        <button id="login_button" class="btn btn-default btn-sm">Return to Login</button>
-                    </form>
-                </div>
+                <h1>You Are Now Logged Out!</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="buttonCenter">
+                <form action="/idle_app/login">
+                    <button id="login_button" class="button">Return to Login</button>
+                </form>
             </div>
         </div>
     </div>

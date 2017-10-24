@@ -10,65 +10,67 @@
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/login.css' %}"/>
 </head>
 
-<body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg"%}')";>
+<body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
 {% load static %}
 {% block body %}
     <div style="height:10vh;"></div>
-    <div class="mainBox">
+
     <div class="container">
         <div class="container text-center">
             <div class="form-group">
-
-                <div  class="mainBanner text-center">
-                    <img src="{% static "idle_app/img/BBros_logo.png" %}" alt="BBros Logo"width="400" height="200"/>
-                </div>
-                </div>
-            </div>
-            <div class="container text-center">
-                <div class="form-group">
-                    <form method="post" action="{% url 'login' %}">
-                        {% csrf_token %}
-
-                        <div class="login">
-                            <label for="{{ form.username.id_for_label }}"
-                                   class="col-sm-2"><strong>Username</strong></label>
-                            {{ form.username }}
-
-                        </div>
-                        <div class="login">
-                            <label for="{{ form.password.id_for_label }}"
-                                   class="col-sm-2"><strong>Password</strong></label>
-                            {{ form.password }}
-                        </div>
-                        <div class="login">
-                            <button id="login_button" class="btn btn-default btn-sm col-md-2">
-                                Login
-                            </button>
-                        </div>
-                        <div class="login" align="center">
-                            {% if form.non_field_errors %}
-                                <ul class='form-errors'>
-                                    {% for error in form.non_field_errors %}
-                                        <li>{{ error }}</li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="container text-center">
-                <form action="/idle_app/signup/">
-                    <div class="login">
-                        <h2 id="signup_label"><strong>New User? Sign Up Here</strong></h2>
+                <div class="mainBox">
+                    <div class="mainBanner text-center">
+                        <img src="{% static "idle_app/img/BBros_logo.png" %}" alt="BBros Logo" width="400"
+                             height="200"/>
                     </div>
-                    <div class="login">
-                        <button id="sign_up_button" class="btn btn-default btn-sm col-md-2">Sign Up
+                </div>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="form-group">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <div class="buttonCenter">
+                        <label for="{{ form.username.id_for_label }}"
+                               class="col-sm-2"><strong>Username</strong></label>
+                        {{ form.username }}
+
+                    </div>
+                    <div class="buttonCenter">
+                        <label for="{{ form.password.id_for_label }}"
+                               class="col-sm-2"><strong>Password</strong></label>
+                        {{ form.password }}
+                    </div>
+                    <div class="buttonCenter col-md-6">
+                        <button id="login_button" class="button">
+                            Login
                         </button>
+                    </div>
+                    <div class="buttonCenter" align="center">
+                        {% if form.non_field_errors %}
+                            <ul class='form-errors'>
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 </form>
             </div>
         </div>
+        <div class="container text-center">
+            <form action="/idle_app/signup/">
+                <div class="buttonCenter">
+                    <h2 id="signup_label"><strong>New User? Sign Up Here</strong></h2>
+                </div>
+                <div class="buttonCenter col-md-6">
+                    <button id="sign_up_button" class="button">Sign Up
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
     </div>
     </div>
 

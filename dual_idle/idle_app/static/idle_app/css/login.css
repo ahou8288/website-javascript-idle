@@ -2,15 +2,20 @@ input {
     border: solid !important;
     border-color: #000;
 }
-button {
-    background-color: #3e0807;
+.button {
+    background-color: orange;
     color: white;
-    padding: 14px 20px;
+    padding: 10px 18px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
 }
+
+.button:hover{
+    background-color: orangered;
+}
+
 #login_button {
     margin: 0 auto;
     padding: 5px 50px;
@@ -23,7 +28,8 @@ button {
 }
 
 h1 {
-    color: orangered;
+    color: black;
+    text-align: center;
 }
 
 h2{
@@ -41,7 +47,7 @@ h2{
 }
 
 
-.login{
+.buttonCenter{
     text-align: center;
     margin: 0 auto;
 

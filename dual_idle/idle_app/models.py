@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import timedelta
 
+
 class UserProfile(models.Model):
     """
     An optional hook here which can be used to
@@ -23,11 +24,13 @@ class UserProfile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.userprofile.save()
 
+
 class Item(models.Model):
     name = models.CharField(max_length=33)
     displayImagePath = models.URLField()
     baseValue = models.IntegerField()
     upgradeValue = models.IntegerField()
+
     def __todict__(self):
         return {
             "name": self.name,
@@ -35,12 +38,14 @@ class Item(models.Model):
             "upgradeValue": self.upgradeValue
         }
 
+
 class Game(models.Model):
     player = models.ForeignKey(User, related_name='player')
     partner = models.ForeignKey(User, null=True, related_name='partner')
     creationDate = models.DateField()
     linkingCode = models.CharField(max_length=33)
     isPublic = models.BooleanField()
+
 
 class PlayerItem(models.Model):
     user = models.ForeignKey(User)
@@ -57,6 +62,7 @@ class UserGame(models.Model):
     mined = models.BigIntegerField(default=0)
     timePlayed = models.DurationField(
         default=timedelta(seconds=0))
+
     def __todict__(self):
         return {
             "user": {
