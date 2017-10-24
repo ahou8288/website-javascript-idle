@@ -2,23 +2,40 @@ input {
     border: solid !important;
     border-color: #000;
 }
-button {
-    background-color: #422F50;
+
+.button {
+    background-color: orange;
     color: white;
-    padding: 14px 20px;
+    padding: 10px 18px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
+    width: auto;
+    font-size: 24px;
 }
-#login_button {
-    margin-left: 10px;
-}
-#signup {
-    margin-top: 15px;
+
+.button:hover{
+    background-color: orangered;
 }
 
 h1 {
-    color: green;
+    color: black;
+    text-align: center;
+    padding: 20px 20px;
+}
+
+.mainBox{
+    background: rgba(54, 25, 25, .4);
+}
+
+.mainBanner {
+    margin: 5px;
+    padding: 20px;
+}
+
+.buttonCenter{
+    text-align: center;
+    margin: 0 auto;
 
 }

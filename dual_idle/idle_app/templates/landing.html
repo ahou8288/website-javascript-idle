@@ -8,53 +8,60 @@
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/landing.css' %}"/>
 </head>
-<body>
+
+<script>
+    function linkCode() {
+        var linkingCode = document.getElementById('linkingCode_Value').value;
+        var url = "/idle_app/game/" + linkingCode;
+        window.open(url)
+    }
+</script>
+
+<body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
+{% load static %}
 {% block body %}
     <div style="height:10vh;"></div>
     <div class="container">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="jumbotron text-center">
-                    <h1>BitCoin Bros</h1>
-                    <p>Welcome Back! </p>
+        <div class="form-group">
+            <div class="mainBox">
+                <div class="mainBanner text-center">
+                    <img src="{% static "idle_app/img/BBros_logo.png" %}" alt="BBros Logo" width="400" height="200"/>
+
                 </div>
+            </div>
+            <h1>Welcome Back!</h1>
+                    <h2>{{ request.user.username }}</h2>
+            <div class="container text-center col-lg-9">
                 <div id="join_game" class="bordered">
-                     <form method="post" action="{% url 'game' linkingCode="16cf280a46fb8890a113c7a8a3339cd33b061b7a" %}" >{% csrf_token %}
-                        <div class="row">
-                            <div class="col text-center">
-                                <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
-                                <label id="linking_code_label" class="label">Linking Code: </label>
-                                <input type="text" id="linking_code" class="input" value="{{ default_linking_code }}">
-                                </input>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-center">
-                                <button id="join_game_button" class="btn btn-default btn-sm">Join Game
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div id="options">
                     <div class="row">
-                        <div class="col-md-12 text-center">
-                            <form action="/idle_app/game/new">
-                            <button id="create_game" class="btn btn-default btn-sm">Create New Game</button>
-                            </form>
-                            <button id="my_games" class="btn btn-default btn-sm">My Games</button>
+                        <div class="col text-center">
+                            <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
+                            <label id="linking_code_label" class="label">Linking Code: </label>
+                            <input type="text" id="linkingCode_Value" class="input" value="{{ default_linking_code }}"
+                            >
+                            </input>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 text-center">
-
-                            <button id="leaderboard" class="btn btn-default btn-sm">Leaderboards</button>
-                            <form action="/idle_app/logout">
-                                <button id="logout" class="btn btn-default btn-sm">Logout</button>
+                        <div class="buttonCenter col-md-8">
+                            <form action="" method="get">
+                                <button class="button" id="join_game_button" onclick="linkCode()"
+                                >Join Game
+                                </button>
                             </form>
-
                         </div>
+                    </div>
+                </div>
+                <div class="container text-center">
+                    <div class="buttonCenter col-md-8">
+                        <form action="/idle_app/game/new">
+                            <button class="button" id="create_game">Create New Game</button>
+                        </form>
+                        <button class="button" id="my_games">My Games</button>
+                        <button class="button" id="leaderboard">Leaderboards</button>
+                        <form action="/idle_app/logout">
+                            <button class="button" id="logout">Logout</button>
+                        </form>
                     </div>
                 </div>
             </div>
