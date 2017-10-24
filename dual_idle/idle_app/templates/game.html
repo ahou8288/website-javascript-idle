@@ -18,7 +18,8 @@
     <!-- Makes the page have a favourites icon. -->
     <link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
 </head>
-<body>
+<body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
+{% load static %}
 
 <!-- Spacer; -->
 <div class="row" style="height: 2vh;"></div> 
@@ -45,10 +46,10 @@
             <h2 data-bind="text: partner.get('name')"></h2>
         </div>
         <div id="home_button" class="btn btn-default">
-            <a href="/idle_app/landing">
-                <span class="fa fa-arrow-left fa-2x"></span>
-                <h5>Return to home</h5>
-            </a>
+
+        <form action="/idle_app/landing">
+            <button class="button" id="Landing">Return Home</button>
+        </form>
         </div>
     </div>
 </div>

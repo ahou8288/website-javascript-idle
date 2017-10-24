@@ -22,7 +22,7 @@ h5 {
     top: 2vh;
     height: 100%;
 }
-}
+
 .circled {
     border: solid;
     border-width: 3px;
@@ -74,4 +74,21 @@ ul {
 }
 .pad {
     margin: 2px;
+}
+
+.button {
+    background-color: orange;
+    color: white;
+    padding: 10px 50px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    font-size: 16px;
+    height: auto;
+    width: auto;
+}
+
+.button:hover{
+    background-color: orangered;
 }
