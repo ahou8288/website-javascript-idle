@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bitcoin Bros - My Games</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap32.min.css' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/my_games.css' %}"/>
+    <!-- Javascript for Ajax -->
+    <script type="text/javascript" src="{% static 'idle_app/js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/my_games.js' %}"></script>
+
+
+</head>
+
+<body>
+<div class="row justify-content-center" style="height: 4vh;">
+
+</div>
+<!-- top headers -->
+<div class="container-fluid justify-content-center">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+        <div class="row justify-content-lg-center">
+            <h2>My Games</h2>
+        </div>
+    </div>
+    <div class="col-xs-4">
+        <div id="home_button" class="btn btn-default">
+            <a href="/idle_app/landing">
+                <span class="fa fa-arrow-left fa-2x"></span>
+                <h5>Return to home</h5>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center" style="height: 6vh;">
+
+</div>
+<!-- Game Information -->
+<div class="container-fluid">
+    {% for game_instance in game_instances %}
+        <div class="row justify-content-center valign" id="{{ game_instance.linking_code }}">
+            <div class="col-xs-8 text-center justify-content-center" style="min-width:760px">
+                <div class="row">
+                    <div id="playerdata" class="bordered col-xs-12 top-div">
+                        <div class="col-xs-4 justify" style="min-width:180px">
+                            <span class="row justify-content-center" style="height: 4px;"></span>
+                            <div class="row justify-content-start">
+                            <span class="fa-stack fa-la">
+                                <i class="fa fa-square fa-stack-2x"></i>
+                                <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+                            </span>
+                            </div>
+                            <span class="row justify-content-center" style="height: 10px;"></span>
+                            <div class="row justify-content-start">
+                                <label id="linking_code_label">Linking Code: </label>
+                                <input type="text" class="input"
+                                       value="{{ game_instance.linking_code }}">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-3 justify-content-start">
+                            <div class="row justify-content-center" style="height: 1vh;"></div>
+                            <div class="row justify-content-start">
+                                <b>Other user:</b>&nbsp;{{ game_instance.other_user }}
+                            </div>
+                            <div class="row justify-content-start">
+                                <b>Date Created:</b>&nbsp;{{ game_instance.date_created }}
+                            </div>
+                            <div class="row justify-content-start">
+                                <b>Time Played:</b>&nbsp;{{ game_instance.time_played }}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-3 valign">
+                            <span class="row justify-content-center" style="height: 30px;"></span>
+                            <div class="row justify-content-start" style="font-size:170%" ;>
+                                <i class="fa fa-btc fa-lg" aria-hidden="true"></i> <span style="font-size:90%"
+                                                                                         ;>&nbsp;{{ game_instance.wealth }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-2 valign" style="border:10px">
+                            <span class="row justify-content-center" style="height: 4px;"></span>
+                            <div class="row justify-content-end">
+                                <a class="btn btn-primary" href="/idle_app/game/{{ game_instance.linking_code }}">
+                                    <i class="fa fa-play fa-lg" aria-hidden="true"></i> &nbsp;&nbsp;Play&nbsp;&nbsp;</a><br>
+                            </div>
+                            <span class="row justify-content-center" style="height: 4px;"></span>
+                            <div class="row justify-content-end">
+                                <a class="btn btn-danger" id="{{ game_instance.linking_code }}">
+                                    <i class="fa fa-trash-o fa-lg"></i> &nbsp;Delete</a>
+                            </div>
+                            <span class="row justify-content-center" style="height: 4px;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="row justify-content-center" style="height: 4px;"></span>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>

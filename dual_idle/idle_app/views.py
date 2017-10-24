@@ -2,10 +2,11 @@ from django.contrib.auth.forms import AuthenticationForm, authenticate
 from django.contrib.auth import logout, authenticate, login, get_user
 from idle_app.forms import RegistrationForm
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from idle_app import game_api as api
 from idle_app.models import UserGame, Game, PlayerItem, Item
 import json
+import datetime
 
 # from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import login, authenticate
@@ -143,3 +144,70 @@ def signup(request):
     else:
         form = RegistrationForm()
     return render(request, 'sign_up.html', {'form': form})
+
+
+def my_games(request):
+    # display the details of each of the games belonging to the user
+
+    current_user = get_user(request)
+    # if user isn't logged in, redirect to login page
+    if current_user.is_anonymous:
+        return HttpResponseRedirect('/idle_app/login/')
+
+    game_objects = UserGame.objects.filter(user=current_user)
+    game_instances = []
+
+    # for each game_objects, build a game_instance, and add it to game_instances
+    for i in range(0, len(game_objects)):
+
+        linking_code = game_objects[i].game.linkingCode
+        date_created_object = game_objects[i].game.creationDate
+        date_created = str(date_created_object)
+
+        # get partner's name for the game_instance, or set other_user to "none" if no current partner
+        partners_game_objects = UserGame.objects.filter(game=game_objects[i].game).exclude(user=current_user)
+        if len(partners_game_objects) > 0:
+            other_user = str(partners_game_objects[i].user)
+        else:
+            other_user = "None"
+
+        wealth = str(game_objects[i].wealth)
+        time_played = str(game_objects[i].timePlayed)
+
+        game_instance = {
+            "linking_code": linking_code,
+            "date_created": date_created,
+            "other_user": other_user,
+            "wealth": wealth,
+            "time_played": time_played,
+            "pk": game_objects[i].pk,
+        }
+
+        game_instances.append(game_instance)
+
+    # return the page with game_instances
+    return render(request, 'my_games.html', {
+        "game_instances": game_instances,
+    }
+                  )
+
+
+def delete_game(request, argument_linking_code):
+    current_user = get_user(request)
+    if current_user.is_anonymous:
+        return HttpResponseRedirect('/idle_app/login/')
+
+    # if it is an ajax request
+    if request.is_ajax():
+        # try to get Game object where player = current_user
+        game_object = Game.objects.filter(player=current_user).filter(linkingCode=argument_linking_code)
+        # if there is no such object, delete Game object where partner = current_user
+        if len(game_object) == 0:
+            game_object = Game.objects.filter(partner=current_user).filter(linkingCode=argument_linking_code)
+        # delete the associated UserGame objects and the Game object
+        UserGame.objects.filter(game=game_object[0]).delete()
+        game_object.delete()
+
+        return HttpResponse()
+    else:
+        raise Http404
