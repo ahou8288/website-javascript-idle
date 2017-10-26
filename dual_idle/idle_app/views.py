@@ -21,7 +21,7 @@ def landing(request):
     """
 
     if request.user.is_authenticated:
-        print(api.create_game(request))
+        # print(api.create_game(request))
         if request.method == 'GET':
             last_game = None
             try:
@@ -79,19 +79,20 @@ def game(request, linkingCode):
             userGame = UserGame(
                 user=current_user,
                 game=the_game,
-                wealth=0,
+                wealth=199,
             )
             userGame.save()
     except Exception:
         userGame = api.create_game(request)
         the_game = userGame.game
     me, partner, partners_stuff = None, None, None
-    try:  # and see if we have a partner yet
-        partner = UserGame.objects.filter(game=the_game).exclude(user=current_user)
-        partners_stuff = PlayerItem.objects.filter({'game': the_game, 'user': partner.user})
-        me = UserGame.objects.filter(game=the_game).exclude(user=partner.user)
-    except Exception:
-        me = UserGame.objects.filter(game=the_game)
+    partner = UserGame.objects.filter(game=the_game).exclude(user=current_user)
+    if len(partner):
+        partner = partner.last()
+        partners_stuff = PlayerItem.objects.filter(game=the_game).filter(user=partner.user)
+        me = UserGame.objects.filter(game=the_game).exclude(user=partner.user).last()
+    else:
+        me = UserGame.objects.filter(game=the_game).last()
 
     my_stuff = PlayerItem.objects.filter(game=the_game).filter(user=current_user)
     possible_items = list(Item.objects.all())
@@ -99,9 +100,9 @@ def game(request, linkingCode):
     game_data = {
         "game": the_game,
         "me": me,
-        "my_stuff": my_stuff,
-        "partner": partner,
-        "partners_stuff": partners_stuff,
+        "my_stuff": [it.__todict__() for it in my_stuff] if my_stuff else [],
+        "partner": partner if partner else {"wealth": 199, "mined": 0},
+        "partners_stuff": [it.__todict__() for it in partners_stuff] if partners_stuff else [],
         "possible_items": possible_items,
     }
     saved_game_state = {

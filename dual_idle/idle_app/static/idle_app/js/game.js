@@ -186,12 +186,13 @@ function AppViewModel() {
 	}
 
 	self.updatePartner = function(newPartnerItems){
-		console.log(newPartnerItems[0].quantity)
+		// console.log(newPartnerItems[0].quantity)
 		for (i=0; i<newPartnerItems.length; i++){
 			// console.log('partner item '+i+' quantity '+newPartnerItems[i].quantity)
 			self.partnerItems()[i].items(newPartnerItems[i].quantity)
 		}
 	}
+
 }
 
 // Activates knockout.js
@@ -214,6 +215,7 @@ function sendData(){
 		success: function(result) {
 			// Result was confusing
 			// window.console.log(result.partnerItems);
+
 			vm.updatePartner(result.partnerItems)
 		}
 	});
@@ -255,7 +257,7 @@ function getGameData(){
 		});
 		outValue['partnerItems'].push({
 			'item':itemInfo,
-			'quantity':partnerItems[i].upgrades,
+			'quantity':partnerItems[i].items,
 			'upgradeQuantity':partnerItems[i].upgrades
 		});
 	}
@@ -269,11 +271,35 @@ setInterval(function() {
 	vm.giveIncome(1/timesPerSecond);
 }, 1000/timesPerSecond);
 
-sendData();
+$(document).ready(function(){
+	// load the saved game state
+	function initGame(saved_game){
+		// vm.player.get("name")(saved_game['TODO'])
+		vm.player.get("money")(saved_game['me']['wealth']);
+		vm.partner.get("money")(saved_game['partner']['wealth']);
+		vm.player.get("minned")(saved_game['me']['mined']);
 
-timesPerSecond=1;
-setInterval(function() {
-	sendData();
-}, 1000/timesPerSecond);
+		playerItems=ko.toJS(vm.playerItems);
+		partnerItems=ko.toJS(vm.partnerItems);
+		// console.log(saved_game);
+			for (i=0; i<saved_game['my_stuff'].length; i++)
+				vm.playerItems()[i]["items"](saved_game['my_stuff'][i]['quantity']);
+			for (i=0; i<saved_game['partners_stuff'].length; i++)
+				vm.partnerItems()[i]["items"](saved_game['partners_stuff'][i]['quantity']);
+	}
+	// console.log(saved_game);
+	if (typeof(saved_game) != 'undefined')
+		initGame(saved_game);
+
+	// begin updating the game state
+	timesPerSecond=0.5;
+	setInterval(function() {
+		sendData();
+	}, 1000/timesPerSecond);
+});
 
 gameStarted=true;
+
+function printData(){
+	console.log(getGameData());
+}

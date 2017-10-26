@@ -21,7 +21,7 @@ def create_game(request):
     userGame = models.UserGame(
         user=user,
         game=game,
-        wealth=0,
+        wealth=199,
     )
     userGame.save()
     if request.META['CONTENT_TYPE'] == 'json':
@@ -123,12 +123,9 @@ def update(request):
     """
         The response object body:
     """
-
-    print([i['quantity'] for i in partnerItems])
-
     response_object = {
         "partnerUserGame": partnerUserGame,
-        "partnerItems": partnerItems,
+        "partnerItems": partnerItems if partnerItems else [],
     }
     return HttpResponse(json.dumps(response_object),
                             content_type='application/json')

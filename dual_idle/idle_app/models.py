@@ -63,7 +63,8 @@ class PlayerItem(models.Model):
                 "id": self.game.id
             },
             "item": {
-                "id": self.item.id
+                "id": self.item.id,
+                "name": self.item.name
             },
             "quantity": self.quantity,
             "upgradeQuantity": self.upgradeQuantity
