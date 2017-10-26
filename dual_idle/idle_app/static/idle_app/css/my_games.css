@@ -46,3 +46,7 @@ h1 {
 .button:hover{
     background-color: orangered;
 }
+
+.mainBox{
+    background: rgba(54, 25, 25, .4);
+}
