@@ -54,9 +54,8 @@ def update_players_items(g_o, game, user, ctx):
                                         quantity=updated_item['quantity'],
                                         upgradeQuantity=updated_item['upgradeQuantity'])
         myItem.save()
-    return [
-        it.item.__todict__() for it in models.PlayerItem.objects.filter(game=game, user=user)
-    ]
+    return [it.__todict__() for it in models.PlayerItem.objects.filter(game=game, user=user)]
+    # return [it.item.__todict__() for it in models.PlayerItem.objects.filter(game=game, user=user)]
 
 def update(request):
     """request.body.game_object =
@@ -103,7 +102,7 @@ def update(request):
         myUserGame.mined = g_o.get('userGame')['mined']
         myUserGame.timePlayed = timedelta(seconds=g_o.get('userGame')['timePlayed'])
         myUserGame.save()
-    except Exception:
+    except Exception as ex:
         err = {"error": "User is not assigned to this game"}
         print(err)
         return HttpResponse(json.dumps(err),
@@ -118,16 +117,18 @@ def update(request):
         if len(partner) > 1:
             print("Too many users in this game!")
         partner = partner[0].user
-        partnerUserGame = models.UserGame.objects.get(user=partner, game=game)
-        partnerUserGame.__todict__()
+        partnerUserGame = models.UserGame.objects.get(user=partner, game=game).__todict__()
         partnerItems = update_players_items(g_o, game, partner, 'partnerItems')
 
     """
         The response object body:
     """
+
+    print([i['quantity'] for i in partnerItems])
+
     response_object = {
-        "partnerUserGame": partnerUserGame.__todict__(),
+        "partnerUserGame": partnerUserGame,
         "partnerItems": partnerItems,
     }
-    print(response_object)
-    return HttpResponse(json.dumps(response_object))
+    return HttpResponse(json.dumps(response_object),
+                            content_type='application/json')

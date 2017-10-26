@@ -16,25 +16,24 @@
 
 </head>
 
-<body>
+<body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
+{% load static %}
 <div class="row justify-content-center" style="height: 4vh;">
 
 </div>
 <!-- top headers -->
 <div class="container-fluid justify-content-center">
+
     <div class="col-xs-4"></div>
     <div class="col-xs-4">
         <div class="row justify-content-lg-center">
-            <h2>My Games</h2>
+            <h1>My Games</h1>
         </div>
     </div>
     <div class="col-xs-4">
-        <div id="home_button" class="btn btn-default">
-            <a href="/idle_app/landing">
-                <span class="fa fa-arrow-left fa-2x"></span>
-                <h5>Return to home</h5>
-            </a>
-        </div>
+        <form action="/idle_app/landing">
+            <button class="button" id="Landing">Return Home</button>
+        </form>
     </div>
 </div>
 
