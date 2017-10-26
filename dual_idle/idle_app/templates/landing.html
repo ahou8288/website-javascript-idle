@@ -8,15 +8,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/landing.css' %}"/>
     <link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
+    <script type="text/javascript" src="{% static 'idle_app/js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/landing.js' %}"></script>
 </head>
 
-<script>
-    function linkCode() {
-        var linkingCode = document.getElementById('linkingCode_Value').value;
-        var url = "/idle_app/game/" + linkingCode;
-        window.open(url)
-    }
-</script>
 
 <body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
 {% load static %}
@@ -38,18 +33,14 @@
                         <div class="col text-center">
                             <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
                             <label id="linking_code_label" class="label">Linking Code: </label>
-                            <input type="text" id="linkingCode_Value" class="input" value="{{ default_linking_code }}"
-                            >
+                            <input type="text" id="linkingCode_Value" class="input"
+                                   placeholder="{{ default_linking_code }}">
                             </input>
                         </div>
                     </div>
                     <div class="row">
                         <div class="buttonCenter col-md-8">
-                            <form action="" method="get">
-                                <button class="button" id="join_game_button" onclick="linkCode()"
-                                >Join Game
-                                </button>
-                            </form>
+                                <button class="button btn" id="join_game_button" >Join Game </button>
                         </div>
                     </div>
                 </div>
