@@ -62,7 +62,7 @@
                 <h2>Your Items</h2>
                 <ul data-bind="foreach: items">
                     <!-- Visible item info -->
-                    <li data-bind="attr: { id: 'playerHover' + $index() }" class="bordered item">
+                    <li data-bind="attr: { id: 'playerHover' + $index() }" class="bordered item" style="background: #ff9900">
                         <span data-bind="css:'fa-'+icon" class="pad fa pull-left"></span>
                         <strong data-bind="text: name"></strong>
                         <strong data-bind="text: $root.playerItems()[$index()].items"></strong>

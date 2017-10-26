@@ -103,9 +103,11 @@ def update(request):
         myUserGame.mined = g_o.get('userGame')['mined']
         myUserGame.timePlayed = timedelta(seconds=g_o.get('userGame')['timePlayed'])
         myUserGame.save()
-    except Exception:
+
+    except Exception as ex:
         err = {"error": "User is not assigned to this game"}
         print(err)
+        print(ex)
         return HttpResponse(json.dumps(err),
                             content_type='application/json')
 
