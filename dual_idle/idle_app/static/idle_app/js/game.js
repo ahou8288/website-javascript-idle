@@ -56,8 +56,8 @@ item_types=[
 	}
 ];
 
-playerData={name:"Bob",money:200,minned:0,id:0}
-partnerData={name:"Jeff",money:10,id:1}
+playerData={name:"Bob",money:200,minned:0}
+partnerData={name:"Jeff",money:10}
 
 // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 function AppViewModel() {
@@ -185,6 +185,13 @@ function AppViewModel() {
 		self.player.set('minned',minned);
 	}
 
+	self.updatePartner = function(newPartnerItems){
+		console.log(newPartnerItems[0].quantity)
+		for (i=0; i<newPartnerItems.length; i++){
+			// console.log('partner item '+i+' quantity '+newPartnerItems[i].quantity)
+			self.partnerItems()[i].items(newPartnerItems[i].quantity)
+		}
+	}
 }
 
 // Activates knockout.js
@@ -196,11 +203,9 @@ var vm = ko.dataFor(document.body);
 // This function sends data to the server
 // When the game is running it will be called periodically
 // For now it just runs at game startup only
-sendData();
 
 function sendData(){
 	//Send a post with everything
-	console.log('sending post')
 	var jsonString = JSON.stringify(getGameData());
 	$.ajax({
 		type: "POST",
@@ -208,7 +213,8 @@ function sendData(){
 		data: {data: jsonString, csrfmiddlewaretoken: getCookie('csrftoken')},
 		success: function(result) {
 			// Result was confusing
-			// window.console.log(result);
+			// window.console.log(result.partnerItems);
+			vm.updatePartner(result.partnerItems)
 		}
 	});
 }
@@ -222,7 +228,7 @@ function getGameData(){
 			},
 			"wealth": vm.player.get("money")(),
 			"game": {
-				"id": 2 //TODO this one is important
+				"id": this_game_id //TODO this one is important
 			},
 			"mined": vm.player.get("minned")(),
 			"timePlayed": 0, //TODO
@@ -261,6 +267,13 @@ function getGameData(){
 timesPerSecond=100;
 setInterval(function() {
 	vm.giveIncome(1/timesPerSecond);
+}, 1000/timesPerSecond);
+
+sendData();
+
+timesPerSecond=1;
+setInterval(function() {
+	sendData();
 }, 1000/timesPerSecond);
 
 gameStarted=true;

@@ -54,6 +54,21 @@ class PlayerItem(models.Model):
     quantity = models.IntegerField()
     upgradeQuantity = models.IntegerField()
 
+    def __todict__(self):
+        return {
+            "user": {
+                "id": self.user.id
+            },
+            "game": {
+                "id": self.game.id
+            },
+            "item": {
+                "id": self.item.id
+            },
+            "quantity": self.quantity,
+            "upgradeQuantity": self.upgradeQuantity
+        }
+
 
 class UserGame(models.Model):
     user = models.ForeignKey(User)

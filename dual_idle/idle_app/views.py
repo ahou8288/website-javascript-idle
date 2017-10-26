@@ -115,9 +115,11 @@ def game(request, linkingCode):
         "elapsed_time": 100,
         "linking_code": the_game.linkingCode
     }
+
     return render(request, 'game.html',
                   {"game_data": saved_game_state,
-                   "saved_game": game_data
+                   "saved_game": game_data,
+                   "this_game_id":the_game.id
                    }
                   )
 
