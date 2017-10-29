@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Landing</title>
+    <title>Bitcoin Bros - Landing</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
@@ -13,21 +13,25 @@
 </head>
 
 
+<
 <body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
-{% load static %}
 {% block body %}
     <div style="height:10vh;"></div>
     <div class="container">
-        <div class="form-group">
-            <div class="mainBox">
-                <div class="mainBanner text-center">
-                    <img src="{% static "idle_app/img/BBros_logo.png" %}" alt="BBros Logo" width="400" height="200"/>
-
+        <div class="container text-center col-md-8">
+            <div class="form-group">
+                <div class="mainBox">
+                    <div class="mainBanner text-center">
+                        <img src="{% static "idle_app/img/BBros_logo.png" %}" alt="BBros Logo" width="400"
+                             height="200"/>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="container text-center">
             <h1>Welcome Back!</h1>
-                    <h2>{{ request.user.username }}</h2>
-            <div class="container text-center col-lg-9">
+            <h2><I>{{ request.user.username }}</I></h2>
+            <div class="container text-center col-md-8">
                 <div id="join_game" class="bordered">
                     <div class="row">
                         <div class="col text-center">
@@ -39,24 +43,26 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="buttonCenter col-md-8">
-                                <button class="button btn" id="join_game_button" >Join Game </button>
+                        <div class="buttonCenter col-md-6">
+                            <button class="button btn" id="join_game_button">Join Game</button>
                         </div>
                     </div>
                 </div>
-                <div class="container text-center">
-                    <div class="buttonCenter col-md-8">
-                        <form action="/idle_app/game/new">
-                            <button class="button" id="create_game">Create New Game</button>
-                        </form>
-                        <form action="/idle_app/my_games">
-                            <button class="button" id="my_games">My Games</button>
-                        </form>
-                        <button class="button" id="leaderboard">Leaderboards</button>
-                        <form action="/idle_app/logout">
-                            <button class="button" id="logout">Logout</button>
-                        </form>
-                    </div>
+            </div>
+            <div class="container text-center">
+                <div class="buttonCenter col-md-6">
+                    <form action="/idle_app/game/new">
+                        <button class="button" id="create_game">Create New Game</button>
+                    </form>
+                    <form action="/idle_app/my_games">
+                        <button class="button" id="my_games">My Games</button>
+                    </form>
+                    <!--
+                    <button class="button" id="leaderboard">Leaderboards</button>
+                    -->
+                    <form action="/idle_app/logout">
+                        <button class="button" id="logout">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>

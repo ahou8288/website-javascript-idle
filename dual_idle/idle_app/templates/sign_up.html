@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Bitcoin Bros - Sign Up</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
@@ -10,79 +10,79 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
 
 </head>
-<body>
+<body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
 {% block body %}
     <div style="height:10vh;"></div>
+
     <div class="container">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <form id="sign_up_form" method="post">{% csrf_token %}
-                    <div class="form-group">
-                        {{ form.non_field_errors }}
+        <div class="container text-center col-md-8">
+            <div class="mainBox">
+                <div class="mainBanner text-center">
+                    <img src="{% static "idle_app/img/BBros_logo.png" %}" alt="BBros Logo" width="400"
+                         height="200"/>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center">
+            <form id="sign_up_form" method="post">{% csrf_token %}
+                <div class="form-group">
+                    {{ form.non_field_errors }}
+                    <div class="buttonCenter">
+                        <label class="col-sm-2" for="{{ form.first_name.id_for_label }}"><strong>First
+                            Name</strong></label>
+                        {{ form.first_name }}
+                    </div>
 
-                        <div class="jumbotron text-center">
-                            <h1>BitCoin Bros</h1>
-                            <p>Sign up to our fantastic new game!</p>
-                        </div>
+                    <div class="buttonCenter">
 
-                        <div class="input-group input-group-lg">
-                            <label class="col-md-3" for="{{ form.first_name.id_for_label }}"><strong>First Name</strong></label>
-                            {{ form.first_name }}
-                        </div>
+                        <label class="col-sm-2" for="{{ form.last_name.id_for_label }}"><strong>Last
+                            Name</strong></label>
+                        {{ form.last_name }}
+                    </div>
 
-                        <div class="input-group input-group-lg">
+                    <div class="buttonCenter">
+                        <label class="col-sm-2" for="{{ form.email.id_for_label }}"><strong>Email</strong></label>
+                        {{ form.email }}
+                    </div>
 
-                            <label class="col-md-3" for="{{ form.last_name.id_for_label }}"><strong>Last
-                                Name</strong></label>
-                            {{ form.last_name }}
-                        </div>
+                    <div>
+                        {{ form.email.error_messages }}
+                    </div>
 
-                        <div class="input-group input-group-lg">
-                            <label class="col-md-3" for="{{ form.email.id_for_label }}"><strong>Email</strong></label>
-                            {{ form.email }}
-                        </div>
+                    <div class="buttonCenter">
+                        <label class="col-sm-2"
+                               for="{{ form.email.id_for_label }}"><strong>Username</strong></label>
+                        {{ form.username }}
+                    </div>
 
-                        <div>
-                            {{ form.email.error_messages }}
-                        </div>
+                    <div>
+                        {{ form.username.errors }}
+                    </div>
 
-                        <div class="input-group input-group-lg">
-                            <label class="col-md-3"
-                                   for="{{ form.email.id_for_label }}"><strong>Username</strong></label>
-                            {{ form.username }}
-                        </div>
-
-                        <div>
-                            {{ form.username.errors }}
-                        </div>
-
-                        <div class="input-group input-group-lg">
-                            <label class="col-md-3"
-                                   for="{{ form.password1.id_for_label }}"><strong>Password</strong></label>
-                            {{ form.password1 }}
-
-                        </div>
-
-                        <div class="input-group input-group-lg">
-                            <label class="col-md-3" for="{{ form.password2.id_for_label }}"><strong>Confirm
-                                Password</strong></label>
-                            {{ form.password2 }}
-                        </div>
-                        <div>
-                            {{ form.password2.errors }}
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <button id="sign_up_button" class="btn btn-default btn-sm col-md-5">Create
-                                Account
-                            </button>
-                        </div>
+                    <div class="buttonCenter">
+                        <label class="col-sm-2"
+                               for="{{ form.password1.id_for_label }}"><strong>Password</strong></label>
+                        {{ form.password1 }}
 
                     </div>
-                </form>
-            </div>
+
+                    <div class="buttonCenter">
+                        <label class="col-sm-2" for="{{ form.password2.id_for_label }}"><strong>Confirm
+                            Password</strong></label>
+                        {{ form.password2 }}
+                    </div>
+                    <div>
+                        {{ form.password2.errors }}
+                    </div>
+
+                    <div class="row">
+                        <div class="buttonCenter col-md-6">
+                            <button id="sign_up_button" class="button">Create Account</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 {% endblock %}

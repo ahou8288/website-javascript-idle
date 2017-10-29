@@ -7,13 +7,7 @@ input {
     border: solid !important;
     border-color: #000;
 }
-button {
-    margin-top: 10px;
-    border: solid !important;
-    border-color: #000;
-    background-color: white;
-    width: 45%;
-}
+
 #join_game {
     margin: 10px;
     padding: 20px;

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Bitcoin Bros - Login</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
@@ -12,12 +12,11 @@
 </head>
 
 <body id="bg" style="background-image: url('{% static "/idle_app/img/bg-10-full.jpg" %}')" ;>
-{% load static %}
 {% block body %}
     <div style="height:10vh;"></div>
 
     <div class="container">
-        <div class="container text-center">
+        <div class="container text-center col-md-8">
             <div class="form-group">
                 <div class="mainBox">
                     <div class="mainBanner text-center">
@@ -71,9 +70,6 @@
             </form>
         </div>
     </div>
-    </div>
-    </div>
-
 {% endblock %}
 </body>
 </html>
