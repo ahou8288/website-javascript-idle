@@ -1,0 +1,9 @@
+What is sent/ uploaded;
+all item info for self itmes and self upgrades
+personal info for self
+required items for partner
+
+What is received
+low level item purchases for opponent
+opponent game details
+high level self item purchases

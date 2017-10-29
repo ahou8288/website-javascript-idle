@@ -94,11 +94,19 @@
                     </li>
                     <!-- Hidden Item info -->
                     <span class="hiddenInfo" data-bind="hoverVisible: true, hoverTargetId: 'playerHover' + $index()">
-                        <!-- <div data-bind="text: 'Number '+     $root.playerItems()[$index()].items()"></div> -->
-                        <div data-bind="text: 'Cost $'+         $root.formattedNumber($root.singlePurchaseCost(0,$index()))"></div>
-                        <div data-bind="text: 'Upgrades '+  $root.playerItems()[$index()].upgrades()"></div>
-                        <div data-bind="text: 'Cost Upgrade $'+ $root.formattedNumber($root.singleUpgradeCost(0,$index()))"></div>
-                        <div data-bind="text: 'Item Income '+   $root.formattedNumber($root.itemIncome(0,$index()),1)"></div>
+                        <div class="row">
+                            <div class="col text-right">Cost:</div>
+                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singlePurchaseCost(0,$index()))"></div>
+                            <div class="w-100"></div>
+                            <div class="col text-right">Upgrades:</div>
+                            <div class="col" data-bind="text: $root.playerItems()[$index()].upgrades()"></div>
+                            <div class="w-100"></div>
+                            <div class="col text-right">Cost to upgrade:</div>
+                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singleUpgradeCost(0,$index()))"></div>
+                            <div class="w-100"></div>
+                            <div class="col text-right">Item Income:</div>
+                            <div class="col" data-bind="text: $root.formattedNumber($root.itemIncome(0,$index()),1)"></div>
+                        </div>
                     </span>
                 </ul>
             </div>
@@ -108,35 +116,33 @@
                 <!-- Player Information -->
                 <div class="col-md-6 text-center">
                     <div id="playerdata" class="bordered col-md-12 top-div">
-                        <!-- <div class="row"> -->
-                            <div id="coins" class="stat">
-                                <span class="col-md-3">
-                                    <span class="fa fa-btc fa-3x"></span>
-                                </span>
-                                <h5 data-bind="text: formattedNumber(player.get('money')()) "></h5>
-                                <h5> Bitcoins</h5>
-                            </div>
-                            <div id="time" class="stat">
-                                <span class="col-md-3">
-                                    <span class="fa fa-clock-o fa-3x"></span>
-                                </span>
-                                <h5>{{ game_data.elapsed_time }} Minutes</h5>
-                            </div>
-                            <div id="minned" class="stat">
-                                <span class="col-md-3">
-                                    <span class="fa fa-dot-circle-o fa-3x"></span>
-                                </span>
-                                <h5 data-bind="text: formattedNumber(player.get('minned')())"></h5>
-                                <h5> Mined</h5>
-                            </div>
-                            <div id="rate" class="stat">
-                                <span class="col-md-3">
-                                    <span class="fa fa-btc fa-3x"></span>
-                                </span>
-                                <h5 data-bind="text: formattedNumber(totalPlayerIncome(),1)"></h5>
-                                <h5> Coins/s</h5>
-                            </div>
-                        <!-- </div> -->
+                        <div id="coins" class="stat">
+                            <span class="col-md-3">
+                                <span class="fa fa-btc fa-3x"></span>
+                            </span>
+                            <h5 data-bind="text: formattedNumber(player.get('money')()) "></h5>
+                            <h5> Bitcoins</h5>
+                        </div>
+                        <div id="time" class="stat">
+                            <span class="col-md-3">
+                                <span class="fa fa-clock-o fa-3x"></span>
+                            </span>
+                            <h5>{{ game_data.elapsed_time }} Minutes</h5>
+                        </div>
+                        <div id="minned" class="stat">
+                            <span class="col-md-3">
+                                <span class="fa fa-dot-circle-o fa-3x"></span>
+                            </span>
+                            <h5 data-bind="text: formattedNumber(player.get('minned')())"></h5>
+                            <h5> Mined</h5>
+                        </div>
+                        <div id="rate" class="stat">
+                            <span class="col-md-3">
+                                <span class="fa fa-btc fa-3x"></span>
+                            </span>
+                            <h5 data-bind="text: formattedNumber(totalPlayerIncome(),1)"></h5>
+                            <h5> Coins/s</h5>
+                        </div>
                     </div>
                 </div>
                 <!-- Partner Information -->
@@ -184,14 +190,23 @@
                         <strong data-bind="text: name"></strong>
                         <strong data-bind="text: $root.partnerItems()[$index()].items"></strong>
 
-                        <button data-bind="click: $root.itemPurchase(1,$index()) " class="unselectable fa fa-plus"></button>
+                        <button data-bind="click: $root.itemPurchase(1,$index()) , css:{active:!selfPurchase, disabled:selfPurchase}" class="unselectable fa fa-plus"></button>
                     </li>
                     <!-- Hidden Item info -->
                     <span class="hiddenInfo" data-bind="hoverVisible: true, hoverTargetId: 'partnerHover' + $index()">
-                        <div data-bind="text: 'Cost $'+         $root.formattedNumber($root.singlePurchaseCost(1,$index()))"></div>
-                        <div data-bind="text: 'Upgrades '+      $root.playerItems()[$index()].upgrades()"></div>
-                        <div data-bind="text: 'Cost Upgrade $'+ $root.formattedNumber($root.singleUpgradeCost(1,$index()))"></div>
-                        <div data-bind="text: 'Item Income '+   $root.formattedNumber($root.itemIncome(1,$index()),1)"></div>
+                        <div class="row">
+                            <div class="col">Cost</div>
+                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singlePurchaseCost(1,$index()))"></div>
+                            <div class="w-100"></div>
+                            <div class="col">Upgrades</div>
+                            <div class="col" data-bind="text: $root.partnerItems()[$index()].upgrades()"></div>
+                            <div class="w-100"></div>
+                            <div class="col">Cost to upgrade</div>
+                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singleUpgradeCost(1,$index()))"></div>
+                            <div class="w-100"></div>
+                            <div class="col">Item Income</div>
+                            <div class="col" data-bind="text: $root.formattedNumber($root.itemIncome(1,$index()),1)"></div>
+                        </div>
                     </span>
                 </ul>
             </div>

@@ -29,7 +29,7 @@ item_types=[
 		baseRate:0.2,
 		baseCost:10,
 		upgradeRate:0.2,
-		upgradeCost:500,
+		upgradeCost:50,
 		selfPurchase:true,
 	}
 	,
@@ -40,7 +40,7 @@ item_types=[
 		baseRate:1.2,
 		baseCost:100,
 		upgradeRate:1.2,
-		upgradeCost:50,
+		upgradeCost:500,
 		selfPurchase:true,
 	}
 	,
@@ -73,7 +73,7 @@ item_types=[
 		baseRate:400,
 		baseCost:100000,
 		upgradeRate:400,
-		upgradeCost:500,
+		upgradeCost:250000,
 		selfPurchase:false,
 	}
 	,
@@ -84,7 +84,7 @@ item_types=[
 		baseRate:3000,
 		baseCost:1000000,
 		upgradeRate:3000,
-		upgradeCost:5000,
+		upgradeCost:1000000,
 		selfPurchase:false,
 	}
 	,
@@ -95,7 +95,7 @@ item_types=[
 		baseRate:20000,
 		baseCost:10000000,
 		upgradeRate:0.2,
-		upgradeCost:20000,
+		upgradeCost:5000000,
 		selfPurchase:false,
 	}
 	,
@@ -106,7 +106,7 @@ item_types=[
 		baseRate:1000000,
 		baseCost:300000000,
 		upgradeRate:1000000,
-		upgradeCost:500,
+		upgradeCost:300000000,
 		selfPurchase:false,
 	}
 	,
@@ -117,7 +117,7 @@ item_types=[
 		baseRate:3000000,
 		baseCost:9999999999,
 		upgradeRate:3000000,
-		upgradeCost:5000,
+		upgradeCost:1,
 		selfPurchase:false,
 	}
 ];
@@ -332,7 +332,7 @@ function getGameData(){
 };
 
 // Begin generating coins
-timesPerSecond=100;
+timesPerSecond=30; // Increases workload but smooths money generation.
 setInterval(function() {
 	vm.giveIncome(1/timesPerSecond);
 }, 1000/timesPerSecond);
@@ -358,10 +358,10 @@ $(document).ready(function(){
 		initGame(saved_game);
 
 	// begin updating the game state
-	timesPerSecond=0.5;
+	updatesPerSecond=0.5;
 	setInterval(function() {
 		sendData();
-	}, 1000/timesPerSecond);
+	}, 1000/updatesPerSecond);
 });
 
 gameStarted=true;
