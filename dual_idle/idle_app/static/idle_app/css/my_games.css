@@ -1,6 +1,7 @@
 .bordered {
     border: solid 3px;
 }
+
 input {
     margin-bottom: 10px;
     padding-left: 5px;
@@ -14,9 +15,9 @@ input {
 }
 
 .valign > [class*="col"] {
-  display: inline-block;
-  float: none;
-  vertical-align: middle;
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
 }
 
 h1 {
@@ -37,10 +38,17 @@ h1 {
     width: auto;
 }
 
-.button:hover{
+.button:hover {
     background-color: orangered;
 }
 
-.mainBox{
+.mainBox {
     background: rgba(54, 25, 25, .4);
+}
+
+#bg {
+    background-size: 1920px 1080px;
+    background-repeat: repeat;
+    background-position: top;
+    background-attachment: fixed;
 }
