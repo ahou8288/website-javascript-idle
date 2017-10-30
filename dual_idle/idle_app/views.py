@@ -82,6 +82,8 @@ def game(request, linkingCode):
                 wealth=199,
             )
             userGame.save()
+            the_game.partner = current_user
+            the_game.save()
     except Exception:
         userGame = api.create_game(request)
         the_game = userGame.game
@@ -174,7 +176,7 @@ def my_games(request):
             game = game_objects[i].game
             partner = game.partner if game.partner != current_user else game.player
             partnerGame = UserGame.objects.filter(game=game).filter(user=partner)
-            other_user = str(partnerGame)
+            other_user = str(partnerGame.last().user)
         else:
             other_user = "None"
 
