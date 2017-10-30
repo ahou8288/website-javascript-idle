@@ -171,7 +171,10 @@ def my_games(request):
         # get partner's name for the game_instance, or set other_user to "none" if no current partner
         partners_game_objects = UserGame.objects.filter(game=game_objects[i].game).exclude(user=current_user)
         if len(partners_game_objects) > 0:
-            other_user = str(partners_game_objects[i].user)
+            game = game_objects[i].game
+            partner = game.partner if game.partner != current_user else game.player
+            partnerGame = UserGame.objects.filter(game=game).filter(user=partner)
+            other_user = str(partnerGame)
         else:
             other_user = "None"
 
