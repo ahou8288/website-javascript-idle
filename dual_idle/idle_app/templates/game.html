@@ -26,11 +26,12 @@
         },
         "me": {
             "wealth": {{ saved_game.me.wealth }},
-            "mined": {{ saved_game.me.mined }}
+            "mined": {{ saved_game.me.mined }},
+            "name": '{{ request.user.username }}'
         },
         "my_stuff": {{ saved_game.my_stuff|safe }},
         "partner": {
-            //"name": {# saved_game.partner.user #},
+            "name": '{{ saved_game.partner.user }}',
             //"timePlayed": {# saved_game.partner.timePlayed.minutes #},
             "wealth": {{ saved_game.partner.wealth }},
             "mined": {{ saved_game.partner.mined }}

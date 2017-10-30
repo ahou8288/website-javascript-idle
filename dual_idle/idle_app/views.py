@@ -103,7 +103,7 @@ def game(request, linkingCode):
         "game": the_game,
         "me": me,
         "my_stuff": [it.__todict__() for it in my_stuff] if my_stuff else [],
-        "partner": partner if partner else {"wealth": 199, "mined": 0},
+        "partner": partner if partner else {"wealth": 0, "mined": 0, "name": "No Partner"},
         "partners_stuff": [it.__todict__() for it in partners_stuff] if partners_stuff else [],
         "possible_items": possible_items,
     }
@@ -111,11 +111,9 @@ def game(request, linkingCode):
         "perks": ["snowflake", '', ''],
         "coins": {"username": 10,
                   "username2": 122},
-        "items": {"username": ['calculator', 'mobile', 'desktop'],
-                  "username2": ['calculator']},
         "tips": ["A hot tip for my Bitcoin Bro!",
                  "Another tip...."],
-        "elapsed_time": 100,
+        "elapsed_time": 120,
         "linking_code": the_game.linkingCode
     }
 
