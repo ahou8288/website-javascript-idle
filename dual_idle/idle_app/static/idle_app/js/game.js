@@ -261,7 +261,7 @@ function AppViewModel() {
 
 	self.updatePlayerItems = function(newPlayerItems){
 		// console.log(newPlayerItems)
-		
+
 		for (i=0; i<newPlayerItems.length; i++){
 			var current_name = newPlayerItems[i].item.name;
 			var current_qty = newPlayerItems[i].quantity;
@@ -379,7 +379,7 @@ $(document).ready(function(){
 		initGame(saved_game);
 
 	// begin updating the game state
-	updatesPerSecond=0.3;
+	updatesPerSecond=0.1;
 	setInterval(function() {
 		sendData();
 	}, 1000/updatesPerSecond);

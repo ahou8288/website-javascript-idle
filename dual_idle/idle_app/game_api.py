@@ -70,6 +70,10 @@ def update(request):
     elif type(request.body) == str:
         g_o = json.loads(json.dumps(request.body))
 
+    import pprint
+    pp = pprint.PrettyPrinter(indent=4)
+    print('SENT BY WEBSITE')
+    pp.pprint(g_o)
     # print(g_o)
 
     user=None
@@ -130,5 +134,11 @@ def update(request):
         "partnerItems":partnerItems if partnerItems else [],
         "playerItems":[it.__todict__() for it in models.PlayerItem.objects.filter(game=game, user=user)]
     }
+
+    import pprint
+    pp = pprint.PrettyPrinter(indent=4)
+    print('STORED IN DB')
+    pp.pprint(response_object)
+
     return HttpResponse(json.dumps(response_object),
                             content_type='application/json')
