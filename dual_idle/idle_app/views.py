@@ -213,9 +213,12 @@ def delete_game(request, argument_linking_code):
         # if there is no such object, delete Game object where partner = current_user
         if len(game_object) == 0:
             game_object = Game.objects.filter(partner=current_user).filter(linkingCode=argument_linking_code)
-        # delete the associated UserGame objects and the Game object
-        UserGame.objects.filter(game=game_object[0]).delete()
-        game_object.delete()
+        # if game_object isn't empty, delete the associated UserGame objects and the Game object
+        # otherwise, game must already be deleted, so proceed without removing from database
+        if len(game_object) != 0:
+            user_game_object = UserGame.objects.filter(game=game_object[0])
+            user_game_object.delete()
+            game_object.delete()
 
         return HttpResponse()
     else:
