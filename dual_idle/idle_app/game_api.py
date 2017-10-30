@@ -21,7 +21,7 @@ def create_game(request):
     userGame = models.UserGame(
         user=user,
         game=game,
-        wealth=199,
+        wealth=0,
     )
     userGame.save()
     if request.META['CONTENT_TYPE'] == 'json':
