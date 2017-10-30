@@ -185,12 +185,13 @@
                 <h2>Partner Items</h2>
                 <ul data-bind="foreach: items">
                     <!-- Visible item info -->
-                    <li data-bind="attr: { id: 'partnerHover' + $index() }" class="bordered item">
-                        <span data-bind="css:'fa-'+icon" class="fa"></span>
+                    <li data-bind="attr: { id: 'partnerHover' + $index() }" class="bordered item" style="background: #ff9900">
+                        <span data-bind="css:'fa-'+icon" class="pad fa pull-left"></span>
                         <strong data-bind="text: name"></strong>
                         <strong data-bind="text: $root.partnerItems()[$index()].items"></strong>
-
-                        <button data-bind="click: $root.itemPurchase(1,$index()) , css:{active:!selfPurchase, disabled:selfPurchase}" class="unselectable fa fa-plus"></button>
+                        <span class="pull-right">
+                            <button data-bind="click: $root.itemPurchase(1,$index()), css:{active:!selfPurchase, disabled:selfPurchase}" class="pad btn btn-sm unselectable fa fa-plus"/>
+                        </span>
                     </li>
                     <!-- Hidden Item info -->
                     <span class="hiddenInfo" data-bind="hoverVisible: true, hoverTargetId: 'partnerHover' + $index()">
