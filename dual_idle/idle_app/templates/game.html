@@ -175,39 +175,6 @@
                         </div>
                     </div>
                     <div class="col-md-6 text-center">
-                        <style for="chat-window-placeholder">
-                            .speech-bubble {
-                                margin-top: 10px;
-                                margin-left: 20px;
-                                margin-right: 20px;
-                                background-color: #f8f8f8;
-                                border: 1px solid #c8c8c8;
-                                border-radius: 5px;
-                                width: 50%;
-                                text-align: center;
-                                padding: 2px;
-                                position: relative;
-                            }
-
-                            .right-bubble {
-                                margin-left: 40%;
-                            }
-
-                            .speech-bubble .arrow {
-                                border-style: solid;
-                                position: absolute;
-                            }
-
-                            .bottom {
-                                border-color: #c8c8c8 transparent transparent transparent;
-                                border-width: 8px 8px 0px 8px;
-                                bottom: -8px;
-                            }
-
-                            .right-arrow {
-                                left: 90%;
-                            }
-                        </style>
                         <div id="chat" class="bordered col-md-12 btm-div">
                             <h3 style="margin-bottom: 20px;">Partner Chat</h3>
                             {# for msg in game_data.messages #}
@@ -220,7 +187,7 @@
                                 <div class="arrow bottom"></div>
                                 <div>What's up?</div>
                             </div>
-                            <input style="margin-top: 40px; width: 90%;" type="text" disabled placeholder="... "/>
+                            <input class="chat-input" type="text" disabled placeholder="... "/>
                             <span style="margin-left: -30px;" class='fa fa-smile-o'></span>
                         </div>
                     </div>
