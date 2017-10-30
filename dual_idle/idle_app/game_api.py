@@ -46,7 +46,8 @@ def update_players_items(g_o, game, user, ctx):
         try:
             myItem = myItems.get(item=item)
             myItem.upgradeQuantity = updated_item['upgradeQuantity']
-            myItem.quantity = updated_item['quantity']
+            if 'quantity' in updated_item:
+                myItem.quantity = updated_item['quantity']
         except Exception:
             myItem = models.PlayerItem(item=item,
                                         user=user,
@@ -70,10 +71,10 @@ def update(request):
     elif type(request.body) == str:
         g_o = json.loads(json.dumps(request.body))
 
-    import pprint
-    pp = pprint.PrettyPrinter(indent=4)
-    print('SENT BY WEBSITE')
-    pp.pprint(g_o)
+    # import pprint
+    # pp = pprint.PrettyPrinter(indent=4)
+    # print('SENT BY WEBSITE')
+    # pp.pprint(g_o)
     # print(g_o)
 
     user=None
@@ -135,10 +136,10 @@ def update(request):
         "playerItems":[it.__todict__() for it in models.PlayerItem.objects.filter(game=game, user=user)]
     }
 
-    import pprint
-    pp = pprint.PrettyPrinter(indent=4)
-    print('STORED IN DB')
-    pp.pprint(response_object)
+    # import pprint
+    # pp = pprint.PrettyPrinter(indent=4)
+    # print('STORED IN DB')
+    # pp.pprint(response_object)
 
     return HttpResponse(json.dumps(response_object),
                             content_type='application/json')

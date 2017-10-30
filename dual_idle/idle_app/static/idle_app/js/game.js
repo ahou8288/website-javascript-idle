@@ -253,6 +253,7 @@ function AppViewModel() {
 
 	self.updatePartnerItems = function(newPartnerItems){
 		// console.log(newPartnerItems[0].quantity)
+		// TODO only write if the partner controls an item
 		for (i=0; i<newPartnerItems.length; i++){
 			// console.log('partner item '+i+' quantity '+newPartnerItems[i].quantity)
 			self.partnerItems()[i].items(newPartnerItems[i].quantity);
@@ -335,16 +336,23 @@ function getGameData(){
 				"upgradeValue": item_types[i].upgradeRate,
 				"upgradeCost": item_types[i].upgradeCost
 			}
-		outValue['playerItems'].push({
-			'item':itemInfo,
-			'quantity':playerItems[i].items,
-			'upgradeQuantity':playerItems[i].upgrades
-		});
 		if (!item_types[i].selfPurchase){
 			outValue['partnerItems'].push({
 				'item':itemInfo,
 				'quantity':partnerItems[i].items,
 				'upgradeQuantity':partnerItems[i].upgrades
+			});
+			outValue['playerItems'].push({
+				'item':itemInfo,
+				'upgradeQuantity':playerItems[i].upgrades
+			});
+		}
+		else
+		{
+			outValue['playerItems'].push({
+				'item':itemInfo,
+				'quantity':playerItems[i].items,
+				'upgradeQuantity':playerItems[i].upgrades
 			});
 		}
 	}
@@ -379,7 +387,7 @@ $(document).ready(function(){
 		initGame(saved_game);
 
 	// begin updating the game state
-	updatesPerSecond=0.1;
+	updatesPerSecond=1;
 	setInterval(function() {
 		sendData();
 	}, 1000/updatesPerSecond);
