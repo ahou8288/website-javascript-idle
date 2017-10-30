@@ -176,7 +176,10 @@ def my_games(request):
             game = game_objects[i].game
             partner = game.partner if game.partner != current_user else game.player
             partnerGame = UserGame.objects.filter(game=game).filter(user=partner)
-            other_user = str(partnerGame.last().user)
+            if not partnerGame.last() is None:
+                other_user = str(partnerGame.last().user)
+            else:
+                other_user = "None"
         else:
             other_user = "None"
 
