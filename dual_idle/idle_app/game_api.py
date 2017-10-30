@@ -97,7 +97,7 @@ def update(request):
                             content_type='application/json')
 
     try:
-        print("trying to get usergame for: id=%d and game id: %d"%(user.id,game.id))
+        # print("trying to get usergame for: id=%d and game id: %d"%(user.id,game.id))
 
         myUserGame = models.UserGame.objects.get(game=game, user=user)
         myUserGame.wealth = g_o.get('userGame')['wealth']
@@ -126,8 +126,9 @@ def update(request):
         The response object body:
     """
     response_object = {
-        "partnerUserGame": partnerUserGame,
-        "partnerItems": partnerItems if partnerItems else []
+        "partnerUserGame":partnerUserGame,
+        "partnerItems":partnerItems if partnerItems else [],
+        "playerItems":[it.__todict__() for it in models.PlayerItem.objects.filter(game=game, user=user)]
     }
     return HttpResponse(json.dumps(response_object),
                             content_type='application/json')

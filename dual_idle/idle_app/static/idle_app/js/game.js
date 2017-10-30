@@ -255,14 +255,29 @@ function AppViewModel() {
 		// console.log(newPartnerItems[0].quantity)
 		for (i=0; i<newPartnerItems.length; i++){
 			// console.log('partner item '+i+' quantity '+newPartnerItems[i].quantity)
-			self.partnerItems()[i].items(newPartnerItems[i].quantity)
+			self.partnerItems()[i].items(newPartnerItems[i].quantity);
+		}
+	}
+
+	self.updatePlayerItems = function(newPlayerItems){
+		// console.log(newPlayerItems)
+		
+		for (i=0; i<newPlayerItems.length; i++){
+			var current_name = newPlayerItems[i].item.name;
+			var current_qty = newPlayerItems[i].quantity;
+			for (j=0; j<item_types.length; j++){
+				if (item_types[j].name == current_name){
+					if (!item_types[j].selfPurchase){
+						self.playerItems()[j].items(current_qty)
+					}
+				}
+			}
 		}
 	}
 
 	self.updatePartnerInfo = function(newPartnerInfo){
 		self.partner.set('money',newPartnerInfo.wealth)
 		self.partner.set('minned',newPartnerInfo.mined)
-
 	}
 
 }
@@ -286,6 +301,7 @@ function sendData(){
 		data: {data: jsonString, csrfmiddlewaretoken: getCookie('csrftoken')},
 		success: function(result) {
 			vm.updatePartnerItems(result.partnerItems)
+			vm.updatePlayerItems(result.playerItems)
 			vm.updatePartnerInfo(result.partnerUserGame)
 		}
 	});
@@ -363,7 +379,7 @@ $(document).ready(function(){
 		initGame(saved_game);
 
 	// begin updating the game state
-	updatesPerSecond=0.5;
+	updatesPerSecond=0.3;
 	setInterval(function() {
 		sendData();
 	}, 1000/updatesPerSecond);
