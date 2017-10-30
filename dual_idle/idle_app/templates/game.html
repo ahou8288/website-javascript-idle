@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <title>BitCoin Bros - Game</title>
     {% load static %}
-    <script type="text/javascript">this_game_id={{this_game_id}}</script>
+    <script type="text/javascript">this_game_id ={{ this_game_id }}</script>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/game.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/game.css' %}"/>
     <!-- For ajax requests -->
-    <script type="text/javascript" src="{% static 'idle_app/js/jquery-3.2.1.min.js' %}" ></script> 
+    <script type="text/javascript" src="{% static 'idle_app/js/jquery-3.2.1.min.js' %}"></script>
     <!-- Also for ajax requests, handles cookie info -->
-    <script type="text/javascript" src="{% static 'idle_app/js/csrf.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/csrf.js' %}"></script>
     <!-- Does all the heavy lifting in the UI. Does all data-binding -->
-    <script type="text/javascript" src="{% static 'idle_app/js/knockoutdebug.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/knockoutdebug.js' %}"></script>
     <!-- Extends knockout a bit to add dictionaries -->
-    <script type="text/javascript" src="{% static 'idle_app/js/knockoutDictionary.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/knockoutDictionary.js' %}"></script>
     <!-- Makes the page have a favourites icon. -->
     <link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
 
@@ -43,200 +43,211 @@
 {% load static %}
 
 <!-- Spacer; -->
-<div class="row" style="height: 2vh;"></div> 
+<div class="row" style="height: 2vh;"></div>
 {% block body %}
 
-<!-- Debugging data -->
-<!-- <pre data-bind="text: ko.toJSON($data, null, 2)"></pre> -->
+    <!-- Debugging data -->
+    <!-- <pre data-bind="text: ko.toJSON($data, null, 2)"></pre> -->
 
-<!-- top headers -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3 text-center">
-            <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
-            <label id="linking_code_label" class="label">Linking Code: </label>
-            <input type="text" id="linking_code" class="input"
-                value="{{ game_data.linking_code }}">
-        </div>
-        
-        <div class="col-md-3 text-center">
-            <h2 data-bind="text: player.get('name')"></h2>
-        </div>
+    <!-- top headers -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
+                <label id="linking_code_label" class="label">Linking Code: </label>
+                <input type="text" id="linking_code" class="input"
+                       value="{{ game_data.linking_code }}">
+            </div>
 
-        <div class="col-md-3 text-center">
-            <h2 data-bind="text: partner.get('name')"></h2>
-        </div>
-        <div id="home_button" class="btn btn-default">
+            <div class="col-md-3 text-center">
+                <h2 data-bind="text: player.get('name')"></h2>
+            </div>
 
-        <form action="/idle_app/landing">
-            <button class="button" id="Landing">Return Home</button>
-        </form>
+            <div class="col-md-3 text-center">
+                <h2 data-bind="text: partner.get('name')"></h2>
+            </div>
+            <div id="home_button" class="btn btn-default">
+
+                <form action="/idle_app/landing">
+                    <button class="button" id="Landing">Return Home</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Center Game window boxes -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="container-fluid col-md-3 text-center">
-            <div id="items" class="bordered side-div">
-                <h2>Your Items</h2>
-                <ul data-bind="foreach: items">
-                    <!-- Visible item info -->
-                    <li data-bind="attr: { id: 'playerHover' + $index() }" class="bordered item" style="background: #ff9900">
-                        <span data-bind="css:'fa-'+icon" class="pad fa pull-left"></span>
-                        <strong data-bind="text: name"></strong>
-                        <strong data-bind="text: $root.playerItems()[$index()].items"></strong>
-                        <span class="pull-right">
-                            <button data-bind="click: $root.itemPurchase(0,$index()), css:{active:selfPurchase, disabled:!selfPurchase}" class="pad btn btn-sm unselectable fa fa-plus"/>
-                            <button data-bind="click: $root.itemUpgrade(0,$index())" class="pad unselectable btn btn-sm fa fa-arrow-up"/>
+    <!-- Center Game window boxes -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container-fluid col-md-3 text-center">
+                <div id="items" class="bordered side-div">
+                    <h2>Your Items</h2>
+                    <ul data-bind="foreach: items">
+                        <!-- Visible item info -->
+                        <li data-bind="attr: { id: 'playerHover' + $index() }" class="bordered item"
+                            style="background: #ff9900">
+                            <span data-bind="css:'fa-'+icon" class="pad fa pull-left"></span>
+                            <strong data-bind="text: name"></strong>
+                            <strong data-bind="text: $root.playerItems()[$index()].items"></strong>
+                            <span class="pull-right">
+                            <button data-bind="click: $root.itemPurchase(0,$index()), css:{active:selfPurchase, disabled:!selfPurchase}"
+                                    class="pad btn btn-sm unselectable fa fa-plus"/>
+                            <button data-bind="click: $root.itemUpgrade(0,$index())"
+                                    class="pad unselectable btn btn-sm fa fa-arrow-up"/>
                         </span>
-                    </li>
-                    <!-- Hidden Item info -->
-                    <span class="hiddenInfo" data-bind="hoverVisible: true, hoverTargetId: 'playerHover' + $index()">
+                        </li>
+                        <!-- Hidden Item info -->
+                        <span class="hiddenInfo"
+                              data-bind="hoverVisible: true, hoverTargetId: 'playerHover' + $index()">
                         <div class="row">
                             <div class="col text-right">Cost:</div>
-                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singlePurchaseCost(0,$index()))"></div>
+                            <div class="col"
+                                 data-bind="text: '$'+$root.formattedNumber($root.singlePurchaseCost(0,$index()))"></div>
                             <div class="w-100"></div>
                             <div class="col text-right">Upgrades:</div>
                             <div class="col" data-bind="text: $root.playerItems()[$index()].upgrades()"></div>
                             <div class="w-100"></div>
                             <div class="col text-right">Cost to upgrade:</div>
-                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singleUpgradeCost(0,$index()))"></div>
+                            <div class="col"
+                                 data-bind="text: '$'+$root.formattedNumber($root.singleUpgradeCost(0,$index()))"></div>
                             <div class="w-100"></div>
                             <div class="col text-right">Item Income:</div>
-                            <div class="col" data-bind="text: $root.formattedNumber($root.itemIncome(0,$index()),1)"></div>
+                            <div class="col"
+                                 data-bind="text: $root.formattedNumber($root.itemIncome(0,$index()),1)"></div>
                         </div>
                     </span>
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="container-fluid col-md-6 ">
-            <div class="row">
-                <!-- Player Information -->
-                <div class="col-md-6 text-center">
-                    <div id="playerdata" class="bordered col-md-12 top-div">
-                        <div id="coins" class="stat">
+            <div class="container-fluid col-md-6 ">
+                <div class="row">
+                    <!-- Player Information -->
+                    <div class="col-md-6 text-center">
+                        <div id="playerdata" class="bordered col-md-12 top-div">
+                            <div id="coins" class="stat">
                             <span class="col-md-3">
                                 <span class="fa fa-btc fa-3x"></span>
                             </span>
-                            <h5 data-bind="text: formattedNumber(player.get('money')()) "></h5>
-                            <h5> Bitcoins</h5>
-                        </div>
-                        <div id="time" class="stat">
+                                <h5 data-bind="text: formattedNumber(player.get('money')()) "></h5>
+                                <h5> Bitcoins</h5>
+                            </div>
+                            <div id="time" class="stat">
                             <span class="col-md-3">
                                 <span class="fa fa-clock-o fa-3x"></span>
                             </span>
-                            <h5>{{ game_data.elapsed_time }} Minutes</h5>
-                        </div>
-                        <div id="minned" class="stat">
+                                <h5>{{ game_data.elapsed_time }} Minutes</h5>
+                            </div>
+                            <div id="minned" class="stat">
                             <span class="col-md-3">
                                 <span class="fa fa-dot-circle-o fa-3x"></span>
                             </span>
-                            <h5 data-bind="text: formattedNumber(player.get('minned')())"></h5>
-                            <h5> Mined</h5>
-                        </div>
-                        <div id="rate" class="stat">
+                                <h5 data-bind="text: formattedNumber(player.get('minned')())"></h5>
+                                <h5> Mined</h5>
+                            </div>
+                            <div id="rate" class="stat">
                             <span class="col-md-3">
                                 <span class="fa fa-btc fa-3x"></span>
                             </span>
-                            <h5 data-bind="text: formattedNumber(totalPlayerIncome(),1)"></h5>
-                            <h5> Coins/s</h5>
+                                <h5 data-bind="text: formattedNumber(totalPlayerIncome(),1)"></h5>
+                                <h5> Coins/s</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Partner Information -->
-                <div class="col-md-6 text-center">
-                    <div id="partner" class="bordered col-md-12 top-div">
-                        <div id="coins" class="stat">
+                    <!-- Partner Information -->
+                    <div class="col-md-6 text-center">
+                        <div id="partner" class="bordered col-md-12 top-div">
+                            <div id="coins" class="stat">
                             <span class="col-md-3">
                                 <span class="fa fa-btc fa-3x"></span>
                             </span>
-                            <h5 data-bind="text: formattedNumber(partner.get('money')()) "></h5>
-                            <h5> Bitcoins</h5>
+                                <h5 data-bind="text: formattedNumber(partner.get('money')()) "></h5>
+                                <h5> Bitcoins</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    <div id="clicker" class="bordered col-md-12 btm-div">
-                        <h3>Click for Coins</h3>
-                        <div class="circled unselectable" data-bind="click: incrementPlayer">
-                            <span class="fa fa-btc fa-5x"></span>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <div id="clicker" class="bordered col-md-12 btm-div">
+                            <h3>Click for Coins</h3>
+                            <img src="{% static 'idle_app/img/bitbutt.png' %}" style="max-width:70%; max-height:70%;"
+                                 class="unselectable" data-bind="click: incrementPlayer"/>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 text-center">
-<style for="chat-window-placeholder">
-.speech-bubble {
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    background-color: #f8f8f8;
-    border: 1px solid #c8c8c8;
-    border-radius: 5px;
-    width: 50%;
-    text-align: center;
-    padding: 2px;
-    position: relative;
-}
-.right-bubble {
-    margin-left: 40%;
-}
-.speech-bubble .arrow {
-    border-style: solid;
-    position: absolute;
-}
+                    <div class="col-md-6 text-center">
+                        <style for="chat-window-placeholder">
+                            .speech-bubble {
+                                margin-top: 10px;
+                                margin-left: 20px;
+                                margin-right: 20px;
+                                background-color: #f8f8f8;
+                                border: 1px solid #c8c8c8;
+                                border-radius: 5px;
+                                width: 50%;
+                                text-align: center;
+                                padding: 2px;
+                                position: relative;
+                            }
 
-.bottom {
-    border-color: #c8c8c8 transparent transparent transparent;
-    border-width: 8px 8px 0px 8px;
-    bottom: -8px;
-}
-.right-arrow {
-    left: 90%;
-}
-</style>
-                    <div id="chat" class="bordered col-md-12 btm-div">
-                    <h3 style="margin-bottom: 20px;">Partner Chat</h3>
-                    {# for msg in game_data.messages #}
-                        <div class="speech-bubble right-bubble">
-                          <div class="arrow bottom right-arrow"></div>
-                          <div>You there?</div>
+                            .right-bubble {
+                                margin-left: 40%;
+                            }
+
+                            .speech-bubble .arrow {
+                                border-style: solid;
+                                position: absolute;
+                            }
+
+                            .bottom {
+                                border-color: #c8c8c8 transparent transparent transparent;
+                                border-width: 8px 8px 0px 8px;
+                                bottom: -8px;
+                            }
+
+                            .right-arrow {
+                                left: 90%;
+                            }
+                        </style>
+                        <div id="chat" class="bordered col-md-12 btm-div">
+                            <h3 style="margin-bottom: 20px;">Partner Chat</h3>
+                            {# for msg in game_data.messages #}
+                            <div class="speech-bubble right-bubble">
+                                <div class="arrow bottom right-arrow"></div>
+                                <div>You there?</div>
+                            </div>
+                            {# endfor #}
+                            <div class="speech-bubble">
+                                <div class="arrow bottom"></div>
+                                <div>What's up?</div>
+                            </div>
+                            <input style="margin-top: 40px; width: 90%;" type="text" disabled placeholder="... "/>
+                            <span style="margin-left: -30px;" class='fa fa-smile-o'></span>
                         </div>
-                    {# endfor #}
-                        <div class="speech-bubble">
-                              <div class="arrow bottom"></div>
-                              <div>What's up?</div>
-                        </div>
-                    <input style="margin-top: 40px; width: 90%;" type="text" disabled placeholder="... "/>
-                        <span style="margin-left: -30px;" class='fa fa-smile-o'></span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid col-md-3 text-center">
-            <div id="items" class="bordered side-div">
-                <h2>Partner Items</h2>
-                <ul data-bind="foreach: items">
-                    <!-- Visible item info -->
-                    <li data-bind="attr: { id: 'partnerHover' + $index() }" class="bordered item" style="background: #ff9900">
-                        <span data-bind="css:'fa-'+icon" class="pad fa pull-left"></span>
-                        <strong data-bind="text: name"></strong>
-                        <strong data-bind="text: $root.partnerItems()[$index()].items"></strong>
-                        <span class="pull-right">
-                            <button data-bind="click: $root.itemPurchase(1,$index()), css:{active:!selfPurchase, disabled:selfPurchase}" class="pad btn btn-sm unselectable fa fa-plus"/>
+            <div class="container-fluid col-md-3 text-center">
+                <div id="items" class="bordered side-div">
+                    <h2>Partner Items</h2>
+                    <ul data-bind="foreach: items">
+                        <!-- Visible item info -->
+                        <li data-bind="attr: { id: 'partnerHover' + $index() }" class="bordered item"
+                            style="background: #ff9900">
+                            <span data-bind="css:'fa-'+icon" class="pad fa pull-left"></span>
+                            <strong data-bind="text: name"></strong>
+                            <strong data-bind="text: $root.partnerItems()[$index()].items"></strong>
+                            <span class="pull-right">
+                            <button data-bind="click: $root.itemPurchase(1,$index()), css:{active:!selfPurchase, disabled:selfPurchase}"
+                                    class="pad btn btn-sm unselectable fa fa-plus"/>
                         </span>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script type="text/javascript" src="{% static 'idle_app/js/game_items.js' %}" ></script>
-<script type="text/javascript" src="{% static 'idle_app/js/viewModel.js' %}" ></script>
-<script type="text/javascript" src="{% static 'idle_app/js/game.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/game_items.js' %}"></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/viewModel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/game.js' %}"></script>
 {% endblock %}
 </body>
 </html>
