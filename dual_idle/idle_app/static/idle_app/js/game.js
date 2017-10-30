@@ -251,12 +251,18 @@ function AppViewModel() {
 		self.player.set('minned',minned);
 	}
 
-	self.updatePartner = function(newPartnerItems){
+	self.updatePartnerItems = function(newPartnerItems){
 		// console.log(newPartnerItems[0].quantity)
 		for (i=0; i<newPartnerItems.length; i++){
 			// console.log('partner item '+i+' quantity '+newPartnerItems[i].quantity)
 			self.partnerItems()[i].items(newPartnerItems[i].quantity)
 		}
+	}
+
+	self.updatePartnerInfo = function(newPartnerInfo){
+		self.partner.set('money',newPartnerInfo.wealth)
+		self.partner.set('minned',newPartnerInfo.mined)
+
 	}
 
 }
@@ -279,10 +285,8 @@ function sendData(){
 		url: 'update',
 		data: {data: jsonString, csrfmiddlewaretoken: getCookie('csrftoken')},
 		success: function(result) {
-			// Result was confusing
-			// window.console.log(result.partnerItems);
-
-			vm.updatePartner(result.partnerItems)
+			vm.updatePartnerItems(result.partnerItems)
+			vm.updatePartnerInfo(result.partnerUserGame)
 		}
 	});
 }
@@ -296,7 +300,7 @@ function getGameData(){
 			},
 			"wealth": vm.player.get("money")(),
 			"game": {
-				"id": this_game_id //TODO this one is important
+				"id": this_game_id
 			},
 			"mined": vm.player.get("minned")(),
 			"timePlayed": 0, //TODO
@@ -309,23 +313,24 @@ function getGameData(){
 	partnerItems=ko.toJS(vm.partnerItems)
 	for (i=0; i<playerItems.length; i++){
 		itemInfo={
-					"name": item_types[i].name,
-					"baseValue": item_types[i].baseRate,
-					"baseCost": item_types[i].baseCost,
-					"upgradeValue": item_types[i].upgradeRate,
-					"upgradeCost": item_types[i].upgradeCost
-				}
-
+				"name": item_types[i].name,
+				"baseValue": item_types[i].baseRate,
+				"baseCost": item_types[i].baseCost,
+				"upgradeValue": item_types[i].upgradeRate,
+				"upgradeCost": item_types[i].upgradeCost
+			}
 		outValue['playerItems'].push({
 			'item':itemInfo,
 			'quantity':playerItems[i].items,
 			'upgradeQuantity':playerItems[i].upgrades
 		});
-		outValue['partnerItems'].push({
-			'item':itemInfo,
-			'quantity':partnerItems[i].items,
-			'upgradeQuantity':partnerItems[i].upgrades
-		});
+		if (!item_types[i].selfPurchase){
+			outValue['partnerItems'].push({
+				'item':itemInfo,
+				'quantity':partnerItems[i].items,
+				'upgradeQuantity':partnerItems[i].upgrades
+			});
+		}
 	}
 	// console.log(outValue);
 	return outValue;
@@ -348,10 +353,10 @@ $(document).ready(function(){
 		playerItems=ko.toJS(vm.playerItems);
 		partnerItems=ko.toJS(vm.partnerItems);
 		// console.log(saved_game);
-			for (i=0; i<saved_game['my_stuff'].length; i++)
-				vm.playerItems()[i]["items"](saved_game['my_stuff'][i]['quantity']);
-			for (i=0; i<saved_game['partners_stuff'].length; i++)
-				vm.partnerItems()[i]["items"](saved_game['partners_stuff'][i]['quantity']);
+		for (i=0; i<saved_game['my_stuff'].length; i++)
+			vm.playerItems()[i]["items"](saved_game['my_stuff'][i]['quantity']);
+		for (i=0; i<saved_game['partners_stuff'].length; i++)
+			vm.partnerItems()[i]["items"](saved_game['partners_stuff'][i]['quantity']);
 	}
 	// console.log(saved_game);
 	if (typeof(saved_game) != 'undefined')
@@ -362,6 +367,7 @@ $(document).ready(function(){
 	setInterval(function() {
 		sendData();
 	}, 1000/updatesPerSecond);
+	sendData();
 });
 
 gameStarted=true;

@@ -193,22 +193,6 @@
                             <button data-bind="click: $root.itemPurchase(1,$index()), css:{active:!selfPurchase, disabled:selfPurchase}" class="pad btn btn-sm unselectable fa fa-plus"/>
                         </span>
                     </li>
-                    <!-- Hidden Item info -->
-                    <span class="hiddenInfo" data-bind="hoverVisible: true, hoverTargetId: 'partnerHover' + $index()">
-                        <div class="row">
-                            <div class="col">Cost</div>
-                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singlePurchaseCost(1,$index()))"></div>
-                            <div class="w-100"></div>
-                            <div class="col">Upgrades</div>
-                            <div class="col" data-bind="text: $root.partnerItems()[$index()].upgrades()"></div>
-                            <div class="w-100"></div>
-                            <div class="col">Cost to upgrade</div>
-                            <div class="col" data-bind="text: '$'+$root.formattedNumber($root.singleUpgradeCost(1,$index()))"></div>
-                            <div class="w-100"></div>
-                            <div class="col">Item Income</div>
-                            <div class="col" data-bind="text: $root.formattedNumber($root.itemIncome(1,$index()),1)"></div>
-                        </div>
-                    </span>
                 </ul>
             </div>
         </div>

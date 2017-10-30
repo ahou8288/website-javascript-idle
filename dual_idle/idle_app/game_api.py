@@ -70,6 +70,8 @@ def update(request):
     elif type(request.body) == str:
         g_o = json.loads(json.dumps(request.body))
 
+    # print(g_o)
+
     user=None
     try:
         user = get_user(request)
@@ -125,7 +127,7 @@ def update(request):
     """
     response_object = {
         "partnerUserGame": partnerUserGame,
-        "partnerItems": partnerItems if partnerItems else [],
+        "partnerItems": partnerItems if partnerItems else []
     }
     return HttpResponse(json.dumps(response_object),
                             content_type='application/json')
