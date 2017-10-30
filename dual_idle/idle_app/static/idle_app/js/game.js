@@ -109,10 +109,24 @@ $(document).ready(function(){
 		playerItems=ko.toJS(vm.playerItems);
 		partnerItems=ko.toJS(vm.partnerItems);
 
-		for (i=0; i<saved_game['my_stuff'].length; i++)
-			vm.playerItems()[i]["items"](saved_game['my_stuff'][i]['quantity']);
-		for (i=0; i<saved_game['partners_stuff'].length; i++)
-			vm.partnerItems()[i]["items"](saved_game['partners_stuff'][i]['quantity']);
+		for (i=0; i<saved_game['my_stuff'].length; i++){
+			current_item = saved_game['my_stuff'][i]
+			current_name = current_item.item.name
+			for (j=0; j<item_types.length;j++){
+				if (item_types[j].name == current_name){
+					vm.playerItems()[j]["items"](current_item['quantity']);
+				}
+			}
+		}
+		for (i=0; i<saved_game['partners_stuff'].length; i++){
+			current_item = saved_game['partners_stuff'][i]
+			current_name = current_item.item.name
+			for (j=0; j<item_types.length;j++){
+				if (item_types[j].name == current_name){
+					vm.partnerItems()[j]["items"](current_item['quantity']);
+				}
+			}
+		}
 	}
 	if (typeof(saved_game) != 'undefined')
 		initGame(saved_game);
