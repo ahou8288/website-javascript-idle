@@ -46,9 +46,12 @@ def update_players_items(g_o, game, user, ctx):
         try:
             myItem = myItems.get(item=item)
             myItem.upgradeQuantity = updated_item['upgradeQuantity']
-            if 'quantity' in updated_item:
-                myItem.quantity = updated_item['quantity']
-        except Exception:
+            if 'updateItemQuantity' in updated_item.keys():
+                if updated_item['updateItemQuantity']:
+                    myItem.quantity = updated_item['quantity']
+            else:
+                    myItem.quantity = updated_item['quantity']
+        except Exception as e:
             myItem = models.PlayerItem(item=item,
                                         user=user,
                                         game=game,
