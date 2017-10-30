@@ -1,6 +1,6 @@
 
-playerData={name:"Bob",money:200,minned:0}
-partnerData={name:"Jeff",money:10}
+playerData={name:"Bob",money:0,minned:0}
+partnerData={name:"Jeff",money:0}
 
 item_types=[
 	{

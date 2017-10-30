@@ -106,6 +106,9 @@ $(document).ready(function(){
 		vm.partner.get("money")(saved_game['partner']['wealth']);
 		vm.player.get("minned")(saved_game['me']['mined']);
 
+		vm.player.get("name")(saved_game['me']['name']);
+		vm.partner.get("name")(saved_game['partner']['name']);
+
 		playerItems=ko.toJS(vm.playerItems);
 		partnerItems=ko.toJS(vm.partnerItems);
 
