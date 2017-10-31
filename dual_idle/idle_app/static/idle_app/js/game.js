@@ -25,7 +25,7 @@ gameStarted=false
 // Activates knockout.js
 ko.applyBindings(new AppViewModel());
 
-// Exposes a link for debugging purposes
+// Exposes a link for reference/debugging purposes
 var vm = ko.dataFor(document.body);
 
 // This function sends data to the server
@@ -67,7 +67,7 @@ function getGameData(){
 
 	playerItems=ko.toJS(vm.playerItems)
 	partnerItems=ko.toJS(vm.partnerItems)
-	for (i=0; i<playerItems.length; i++){
+	for (var i=0; i<playerItems.length; i++){
 		itemInfo={
 				"name": item_types[i].name,
 				"baseValue": item_types[i].baseRate,
@@ -92,6 +92,15 @@ function getGameData(){
 	return outValue;
 };
 
+// Gets a dictionary with names as keys and indexs as values
+function getNameIndex(my_array){
+	var outValue = {};
+	for (var i=0; i<my_array.length; i++){
+		outValue[my_array[i].name]=i
+	}
+	return outValue;
+}
+
 // Begin generating coins
 timesPerSecond=30; // Increases workload but smooths money generation.
 setInterval(function() {
@@ -112,27 +121,33 @@ $(document).ready(function(){
 		playerItems=ko.toJS(vm.playerItems);
 		partnerItems=ko.toJS(vm.partnerItems);
 
-		for (i=0; i<saved_game['my_stuff'].length; i++){
-			current_item = saved_game['my_stuff'][i]
-			current_name = current_item.item.name
-			for (j=0; j<item_types.length;j++){
-				if (item_types[j].name == current_name){
-					vm.playerItems()[j]["items"](current_item['quantity']);
-				}
-			}
+		name_index=getNameIndex(item_types)
+
+		// console.log(name_index)
+		console.log(saved_game['my_stuff'].length);
+
+		for (var i=0; i<saved_game['my_stuff'].length; i++){
+			console.log('blah')
+			current_item = saved_game['my_stuff'][i];
+			current_name = current_item.item.name;
+			
+			console.log(ko.toJS(vm.playerItems));
+
+			vm.playerItems()[name_index[current_name]]["items"](current_item['quantity']);
+			vm.playerItems()[name_index[current_name]]["upgrades"](current_item['upgradeQuantity']);
+			console.log(i);
 		}
-		for (i=0; i<saved_game['partners_stuff'].length; i++){
-			current_item = saved_game['partners_stuff'][i]
-			current_name = current_item.item.name
-			for (j=0; j<item_types.length;j++){
-				if (item_types[j].name == current_name){
-					vm.partnerItems()[j]["items"](current_item['quantity']);
-				}
-			}
+
+		for (var i=0; i<saved_game['partners_stuff'].length; i++){
+			current_item = saved_game['partners_stuff'][i];
+			current_name = current_item.item.name;
+			vm.partnerItems()[name_index[current_name]]["items"](current_item['quantity']);
 		}
 	}
 	if (typeof(saved_game) != 'undefined')
 		initGame(saved_game);
+	
+	gameStarted=true;
 
 	// begin updating the game state
 	updatesPerSecond=1;
@@ -142,4 +157,3 @@ $(document).ready(function(){
 	sendData();
 });
 
-gameStarted=true;

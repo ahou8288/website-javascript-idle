@@ -100,14 +100,14 @@ function AppViewModel() {
 	// Find the total income
 	self.totalPlayerIncome = ko.computed(function() {
 		var income=0;
-		for (i=0; i<self.playerItems().length; i++){
+		for (var i=0; i<self.playerItems().length; i++){
 			income+=self.itemIncome(0,i);
 		}
 		return income;
 	});
 	self.totalPartnerIncome = ko.computed(function() {
 		var income=0;
-		for (i=0; i<self.partnerItems().length; i++){
+		for (var i=0; i<self.partnerItems().length; i++){
 			income+=self.itemIncome(1,i);
 		}
 		return income;
@@ -131,7 +131,7 @@ function AppViewModel() {
 			var current_name = newPartnerItems[i].item.name;
 			var current_qty = newPartnerItems[i].quantity;
 			// Search for the item with a matching name
-			for (j=0; j<item_types.length; j++){
+			for (var j=0; j<item_types.length; j++){
 				if (item_types[j].name == current_name){
 					// If the item cannot be purchased by the player then the partner has control.
 					if (item_types[j].selfPurchase){
@@ -144,12 +144,12 @@ function AppViewModel() {
 
 	self.updatePlayerItems = function(newPlayerItems){
 		// For every item which is sent in the update
-		for (i=0; i<newPlayerItems.length; i++){
+		for (var i=0; i<newPlayerItems.length; i++){
 			// Read the values for that item
 			var current_name = newPlayerItems[i].item.name;
 			var current_qty = newPlayerItems[i].quantity;
 			// Search for the item with a matching name
-			for (j=0; j<item_types.length; j++){
+			for (var j=0; j<item_types.length; j++){
 				if (item_types[j].name == current_name){
 					// If the item cannot be purchased by the player then the partner has control.
 					if (!item_types[j].selfPurchase){

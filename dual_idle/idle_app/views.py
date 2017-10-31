@@ -117,6 +117,8 @@ def game(request, linkingCode):
         "linking_code": the_game.linkingCode
     }
 
+    print(game_data['my_stuff'])
+
     return render(request, 'game.html',
                   {"game_data": saved_game_state,
                    "saved_game": game_data,
