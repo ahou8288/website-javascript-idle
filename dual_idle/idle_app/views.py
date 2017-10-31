@@ -103,10 +103,11 @@ def game(request, linkingCode):
         "game": the_game,
         "me": me,
         "my_stuff": [it.__todict__() for it in my_stuff] if my_stuff else [],
-        "partner": partner if partner else {"wealth": 0, "mined": 0, "name": "No Partner"},
+        "partner": partner if partner else {"wealth": 0, "mined": 0, "user": "No Partner"},
         "partners_stuff": [it.__todict__() for it in partners_stuff] if partners_stuff else [],
         "possible_items": possible_items,
     }
+
     saved_game_state = {
         "perks": ["snowflake", '', ''],
         "coins": {"username": 10,
@@ -116,8 +117,6 @@ def game(request, linkingCode):
         "elapsed_time": 120,
         "linking_code": the_game.linkingCode
     }
-
-    print(game_data['my_stuff'])
 
     return render(request, 'game.html',
                   {"game_data": saved_game_state,

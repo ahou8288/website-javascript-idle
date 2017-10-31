@@ -110,7 +110,6 @@ setInterval(function() {
 $(document).ready(function(){
 	// load the saved game state
 	function initGame(saved_game){
-		// vm.player.get("name")(saved_game['TODO'])
 		vm.player.get("money")(saved_game['me']['wealth']);
 		vm.partner.get("money")(saved_game['partner']['wealth']);
 		vm.player.get("minned")(saved_game['me']['mined']);
@@ -123,25 +122,18 @@ $(document).ready(function(){
 
 		name_index=getNameIndex(item_types)
 
-		// console.log(name_index)
-		console.log(saved_game['my_stuff'].length);
-
 		for (var i=0; i<saved_game['my_stuff'].length; i++){
-			console.log('blah')
 			current_item = saved_game['my_stuff'][i];
 			current_name = current_item.item.name;
-			
-			console.log(ko.toJS(vm.playerItems));
-
 			vm.playerItems()[name_index[current_name]]["items"](current_item['quantity']);
 			vm.playerItems()[name_index[current_name]]["upgrades"](current_item['upgradeQuantity']);
-			console.log(i);
 		}
 
 		for (var i=0; i<saved_game['partners_stuff'].length; i++){
 			current_item = saved_game['partners_stuff'][i];
 			current_name = current_item.item.name;
 			vm.partnerItems()[name_index[current_name]]["items"](current_item['quantity']);
+			vm.partnerItems()[name_index[current_name]]["upgrades"](current_item['upgradeQuantity']); // Not displayed but maybe useful later
 		}
 	}
 	if (typeof(saved_game) != 'undefined')
