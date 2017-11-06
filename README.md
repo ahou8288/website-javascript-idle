@@ -1,32 +1,16 @@
-# README #
+# Bitcoin Bros Idle Game
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This repository contains the source for a javascript and django based website/game.
 
-### What is this repository for? ###
+This website was written as a team for the Internet Software Platforms uni course.
+My part of the 5 man team working on this was to develop all the javascript for the game, and to plan out the database model.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+I also did a lot of work on the html and CSS for the game page (game.html).
 
-### How do I get set up? ###
+## Tech
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
-
-### Test Edit ###
-Test edit
+This website uses;
+* Django
+* Javascript
+* KnockoutJS
+* Lots and lots of AJAX
