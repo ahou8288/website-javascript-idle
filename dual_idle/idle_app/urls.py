@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^login/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
-    url(r'^game2/$', views.game2, name='game2'),
+    url(r'^.*', views.bad_url, name='bad_url'),
+
 ]

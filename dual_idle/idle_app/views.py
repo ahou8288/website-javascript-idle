@@ -66,9 +66,9 @@ def logout_view(request):
     logout(request)
     return render(request, '_logout.html')
 
-
-def game2(request):
-    return render(request, 'game2.html')
+def bad_url(request):
+    logout(request)
+    return render(request, 'bad_url.html')
 
 
 def game(request, linkingCode):
@@ -123,7 +123,7 @@ def game(request, linkingCode):
         "linking_code": the_game.linkingCode
     }
 
-    return render(request, 'game.html',
+    return render(request, 'game2.html',
                   {"game_data": saved_game_state,
                    "saved_game": game_data,
                    "this_game_id":the_game.id
