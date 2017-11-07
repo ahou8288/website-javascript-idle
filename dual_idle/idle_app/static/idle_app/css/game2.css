@@ -1,0 +1,51 @@
+@supports (display: grid) {
+	.site {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-rows: 70px;
+		grid-template-areas:
+			"link name1 name2 home"
+			"items1 user partner items2"
+			"items1 coin chat items2";
+	}
+
+	.chat {
+		grid-area: chat;
+	}
+	.coin {
+		grid-area: coin;
+	}
+	.home {
+		grid-area: home;
+	}
+	.items1 {
+		grid-area: items1;
+	}
+	.items2 {
+		grid-area: items2;
+	}
+	.link {
+		grid-area: link;
+	}
+	.name1 {
+		grid-area: name1;
+	}
+	.name2 {
+		grid-area: name2;
+	}
+	.partner {
+		grid-area: partner;
+	}
+	.user {
+		grid-area: user;
+	}
+}
+
+.site {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow: auto;
+}

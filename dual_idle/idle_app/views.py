@@ -67,6 +67,10 @@ def logout_view(request):
     return render(request, '_logout.html')
 
 
+def game2(request):
+    return render(request, 'game2.html')
+
+
 def game(request, linkingCode):
     current_user = get_user(request)
     if current_user.is_anonymous:
@@ -87,6 +91,7 @@ def game(request, linkingCode):
     except Exception:
         userGame = api.create_game(request)
         the_game = userGame.game
+        return HttpResponseRedirect('/idle_app/game/'+the_game.linkingCode)
     me, partner, partners_stuff = None, None, None
     partner = UserGame.objects.filter(game=the_game).exclude(user=current_user)
     if len(partner):
