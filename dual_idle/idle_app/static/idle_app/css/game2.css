@@ -1,13 +1,4 @@
 @supports (display: grid) {
-	.site {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-		grid-template-rows: 70px;
-		grid-template-areas:
-			"link name1 name2 home"
-			"items1 user partner items2"
-			"items1 coin chat items2";
-	}
 
 	.chat {
 		grid-area: chat;
@@ -39,9 +30,58 @@
 	.user {
 		grid-area: user;
 	}
+
+	.site {
+		display: grid;
+		grid-gap: 20px;
+		padding: 20px;
+	}
+
+	@media screen{
+		.site {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				"home"
+				"link"
+				"name1"
+				"user"
+				"coin"
+				"items1"
+				"name2"
+				"partner"
+				"items2"
+				"chat";
+		}
+	}
+
+	@media screen and (min-width: 600px) {
+		.site {
+			grid-template-columns: 1fr 1fr;
+			grid-template-areas:
+				"link home"
+				"items1 name1"
+				"items1 user"
+				"items1 coin"
+				"items2 name2"
+				"items2 partner"
+				"items2 chat";
+		}
+	}
+
+	@media screen and (min-width: 1000px) {
+		.site {
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			grid-template-rows: 70px;
+			grid-template-areas:
+				"link name1 name2 home"
+				"items1 user partner items2"
+				"items1 coin chat items2";
+		}
+	}
+
 }
 
-.site {
+.fullscreen {
 	position: fixed;
 	top: 0;
 	left: 0;
