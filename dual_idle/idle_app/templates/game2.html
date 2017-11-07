@@ -51,7 +51,19 @@
 		</form>
 	</div>
 	<div class="items1">
-		player items
+		<h2>Your Items</h2>
+		<ul data-bind="foreach: items">
+			<div class="itemlist">
+				<span data-bind="css:'fa-'+icon" class="fa pull-left"></span>
+				<strong data-bind="text: name"></strong>
+				<strong data-bind="text: $root.playerItems()[$index()].items"></strong>
+				<span class="pull-right">
+					<button data-bind="click: $root.itemPurchase(0,$index()), css:{active:selfPurchase, disabled:!selfPurchase}" 
+					class="unselectable fa fa-plus"/>
+					<button data-bind="click: $root.itemUpgrade(0,$index())" class="unselectable fa fa-arrow-up"/>
+				</span>
+			</div>
+		</ul>
 	</div>
 	<div class="user userinformation">
 		<span class="moneyicon fa fa-btc fa-3x"></span>

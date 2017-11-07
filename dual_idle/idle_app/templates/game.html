@@ -88,11 +88,11 @@
 							<strong data-bind="text: name"></strong>
 							<strong data-bind="text: $root.playerItems()[$index()].items"></strong>
 							<span class="pull-right">
-							<button data-bind="click: $root.itemPurchase(0,$index()), css:{active:selfPurchase, disabled:!selfPurchase}"
-									class="pad btn btn-sm unselectable fa fa-plus"/>
-							<button data-bind="click: $root.itemUpgrade(0,$index())"
-									class="pad unselectable btn btn-sm fa fa-arrow-up"/>
-						</span>
+								<button data-bind="click: $root.itemPurchase(0,$index()), css:{active:selfPurchase, disabled:!selfPurchase}"
+										class="pad btn btn-sm unselectable fa fa-plus"/>
+								<button data-bind="click: $root.itemUpgrade(0,$index())"
+										class="pad unselectable btn btn-sm fa fa-arrow-up"/>
+							</span>
 						</li>
 						<!-- Hidden Item info -->
 						<span class="hiddenInfo"
