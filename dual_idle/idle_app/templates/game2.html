@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>BitCoin Bros - Game</title>
+	<meta charset="UTF-8">
+	<title>BitCoin Bros - Game</title>
 	{% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/game2.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/game2.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
+	<script type="text/javascript" src="{% static 'idle_app/js/knockout.js' %}"></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/knockoutDictionary.js' %}"></script>
+    <link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
 </head>
 <body class="site fullscreen">
 
 	<div class="link">
-		linking code	
+		<span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
+		<label id="linking_code_label" class="label">Linking Code: </label>
+		<input type="text" id="linking_code" class="input"
+			   value="{{ game_data.linking_code }}">
 	</div>
 	<div class="name1">
-		player name
+		mane
+		<h2 data-bind="text: player.get('name')"></h2>
 	</div>
 	<div class="name2">
-		partner name
+		name
+		<h2 data-bind="text: partner.get('name')"></h2>
 	</div>
-	<div class="home">
-		home button
+	<div class="home btn btn-default">
+		<form action="/idle_app/landing">
+			<button class="button" id="Landing">Return Home</button>
+		</form>
 	</div>
 	<div class="items1">
 		player items
@@ -27,7 +38,9 @@
 		user details
 	</div>
 	<div class="coin">
-		coin
+	<h3>Click for Coins</h3>
+	<img src="{% static 'idle_app/img/bitbutt.png' %}" style="max-width:70%; max-height:70%;"
+		class="unselectable bitcoin_img" data-bind="click: incrementPlayer"/>
 	</div>
 	<div class="partner">
 		partner details
@@ -39,5 +52,8 @@
 		partner items
 	</div>
 
+    <script type="text/javascript" src="{% static 'idle_app/js/game_items.js' %}"></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/viewModel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'idle_app/js/game.js' %}"></script>
 </body>
 </html>
