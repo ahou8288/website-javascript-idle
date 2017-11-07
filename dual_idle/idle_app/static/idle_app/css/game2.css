@@ -1,5 +1,4 @@
 @supports (display: grid) {
-
 	.chat {
 		grid-area: chat;
 	}
@@ -26,14 +25,23 @@
 	}
 	.partner {
 		grid-area: partner;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 20px;
+		grid-template-rows: 70px;
 	}
 	.user {
 		grid-area: user;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 20px;
+		grid-template-rows: 70px 70px 70px 70px;
 	}
 
 	.site {
 		display: grid;
 		grid-gap: 20px;
+		grid-template-rows: 70px;
 		padding: 20px;
 	}
 
@@ -71,7 +79,6 @@
 	@media screen and (min-width: 1000px) {
 		.site {
 			grid-template-columns: 1fr 1fr 1fr 1fr;
-			grid-template-rows: 70px;
 			grid-template-areas:
 				"link name1 name2 home"
 				"items1 user partner items2"
@@ -90,12 +97,12 @@
 }
 
 .bitcoin_img:hover {
-    background-color: #ffc775;
-    box-shadow: 0px 0px 60px orangered;
-    -moz-box-shadow: 0 0 60px orangered;
-    -webkit-box-shadow: 0 0 60px orangered;
+	background-color: #ffc775;
+	box-shadow: 0px 0px 60px orangered;
+	-moz-box-shadow: 0 0 60px orangered;
+	-webkit-box-shadow: 0 0 60px orangered;
 }
 
 .bitcoin_img {
-    border-radius: 50%;
+	border-radius: 50%;
 }

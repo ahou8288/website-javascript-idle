@@ -31,20 +31,18 @@
 		"partners_stuff": {{ saved_game.partners_stuff|safe }},
 	}</script>
 </head>
-<body class="site fullscreen">
 
+
+<body class="site fullscreen">
 	<div class="link">
 		<span id="linking_code_icon" class="fa fa-link fa-lg" aria-hidden="true"></span>
 		<label id="linking_code_label" class="label">Linking Code: </label>
-		<input type="text" id="linking_code" class="input"
-			   value="{{ game_data.linking_code }}">
+		<input type="text" id="linking_code" class="input" value="{{ game_data.linking_code }}">
 	</div>
 	<div class="name1">
-		mane
 		<h2 data-bind="text: player.get('name')"></h2>
 	</div>
 	<div class="name2">
-		name
 		<h2 data-bind="text: partner.get('name')"></h2>
 	</div>
 	<div class="home btn btn-default">
@@ -56,30 +54,14 @@
 		player items
 	</div>
 	<div class="user">
-			<span class="usericon1 fa fa-btc fa-3x"></span>
-			<h5 data-bind="text: formattedNumber(player.get('money')()) "></h5>
-			<h5> Bitcoins</h5>
-			<div id="time" class="stat">
-			<span class="col-md-3">
-				<span class="fa fa-clock-o fa-3x"></span>
-			</span>
-				<h5>{{ game_data.elapsed_time }} Minutes</h5>
-			</div>
-			<div id="minned" class="stat">
-			<span class="col-md-3">
-				<span class="fa fa-dot-circle-o fa-3x"></span>
-			</span>
-				<h5 data-bind="text: formattedNumber(player.get('minned')())"></h5>
-				<h5> Mined</h5>
-			</div>
-			<div id="rate" class="stat">
-			<span class="col-md-3">
-				<span class="fa fa-btc fa-3x"></span>
-			</span>
-				<h5 data-bind="text: formattedNumber(totalPlayerIncome(),1)"></h5>
-				<h5> Coins/s</h5>
-			</div>
-		</div>
+		<span class="moneyicon fa fa-btc fa-3x"></span>
+		<h5 class="money" data-bind="text: formattedNumber(player.get('money')()) + ' Bitcoins'"></h5>
+		<span class="timeicon fa fa-clock-o fa-3x"></span>
+		<h5 class="time">{{ game_data.elapsed_time }} Minutes</h5>
+		<span class="minnedicon fa fa-dot-circle-o fa-3x"></span>
+		<h5 class="minned" data-bind="text: formattedNumber(player.get('minned')()) + ' Mined'"></h5>
+		<span class="rateicon fa fa-btc fa-3x"></span>
+		<h5  class="rate" data-bind="text: formattedNumber(totalPlayerIncome(),1) + '  Coins/s'"></h5>
 	</div>
 	<div class="coin">
 	<h3>Click for Coins</h3>
@@ -87,7 +69,8 @@
 		class="unselectable bitcoin_img" data-bind="click: incrementPlayer"/>
 	</div>
 	<div class="partner">
-		partner details
+		<span class="moneyicon fa fa-btc fa-3x"></span>
+		<h5 class="money" data-bind="text: formattedNumber(partner.get('money')()) + ' Bitcoins'"></h5>
 	</div>
 	<div class="chat">
 		chat window
