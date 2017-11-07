@@ -30,7 +30,6 @@ def landing(request):
                 pass
             return render(request, 'landing.html', {
                 "default_linking_code": "Enter Linking Code!"})
-
     else:
         return HttpResponseRedirect('/idle_app/login')
 

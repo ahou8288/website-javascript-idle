@@ -4,3 +4,4 @@
 .DS_Store
 __pycache__
 dual_idle/.idea/*
+dual_idle/db.sqlite3

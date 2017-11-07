@@ -6,9 +6,30 @@
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/game2.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'idle_app/css/font-awesome/css/font-awesome.min.css' %}"/>
+	<!-- TODO remove ajax jquery dependency -->
+	<script type="text/javascript" src="{% static 'idle_app/js/jquery-3.2.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'idle_app/js/csrf.js' %}"></script>
 	<script type="text/javascript" src="{% static 'idle_app/js/knockout.js' %}"></script>
-    <script type="text/javascript" src="{% static 'idle_app/js/knockoutDictionary.js' %}"></script>
-    <link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
+	<script type="text/javascript" src="{% static 'idle_app/js/knockoutDictionary.js' %}"></script>
+	<link rel="shortcut icon" type="image/png" href="{% static 'Bitcoin.ico' %}"/>
+	<script type="text/javascript">var saved_game = {
+		"game": {
+			"id": {{ saved_game.game.id }},
+		},
+		"me": {
+			"wealth": {{ saved_game.me.wealth }},
+			"mined": {{ saved_game.me.mined }},
+			"name": '{{ request.user.username }}'
+		},
+		"my_stuff": {{ saved_game.my_stuff|safe }},
+		"partner": {
+			"name": '{{ saved_game.partner.user }}',
+			//"timePlayed": {# saved_game.partner.timePlayed.minutes #},
+			"wealth": {{ saved_game.partner.wealth }},
+			"mined": {{ saved_game.partner.mined }}
+		},
+		"partners_stuff": {{ saved_game.partners_stuff|safe }},
+	}</script>
 </head>
 <body class="site fullscreen">
 
@@ -35,7 +56,30 @@
 		player items
 	</div>
 	<div class="user">
-		user details
+			<span class="usericon1 fa fa-btc fa-3x"></span>
+			<h5 data-bind="text: formattedNumber(player.get('money')()) "></h5>
+			<h5> Bitcoins</h5>
+			<div id="time" class="stat">
+			<span class="col-md-3">
+				<span class="fa fa-clock-o fa-3x"></span>
+			</span>
+				<h5>{{ game_data.elapsed_time }} Minutes</h5>
+			</div>
+			<div id="minned" class="stat">
+			<span class="col-md-3">
+				<span class="fa fa-dot-circle-o fa-3x"></span>
+			</span>
+				<h5 data-bind="text: formattedNumber(player.get('minned')())"></h5>
+				<h5> Mined</h5>
+			</div>
+			<div id="rate" class="stat">
+			<span class="col-md-3">
+				<span class="fa fa-btc fa-3x"></span>
+			</span>
+				<h5 data-bind="text: formattedNumber(totalPlayerIncome(),1)"></h5>
+				<h5> Coins/s</h5>
+			</div>
+		</div>
 	</div>
 	<div class="coin">
 	<h3>Click for Coins</h3>
@@ -52,8 +96,8 @@
 		partner items
 	</div>
 
-    <script type="text/javascript" src="{% static 'idle_app/js/game_items.js' %}"></script>
-    <script type="text/javascript" src="{% static 'idle_app/js/viewModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'idle_app/js/game.js' %}"></script>
+	<script type="text/javascript" src="{% static 'idle_app/js/game_items.js' %}"></script>
+	<script type="text/javascript" src="{% static 'idle_app/js/viewModel.js' %}"></script>
+	<script type="text/javascript" src="{% static 'idle_app/js/game.js' %}"></script>
 </body>
 </html>

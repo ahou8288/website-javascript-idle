@@ -88,3 +88,14 @@
 	right: 0;
 	overflow: auto;
 }
+
+.bitcoin_img:hover {
+    background-color: #ffc775;
+    box-shadow: 0px 0px 60px orangered;
+    -moz-box-shadow: 0 0 60px orangered;
+    -webkit-box-shadow: 0 0 60px orangered;
+}
+
+.bitcoin_img {
+    border-radius: 50%;
+}
