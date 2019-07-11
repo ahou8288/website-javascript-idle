@@ -3,5 +3,6 @@
 .DStore
 .DS_Store
 __pycache__
-dual_idle/.idea/*
-dual_idle/db.sqlite3
+.idea/*
+db.sqlite3
+venv/

@@ -40,17 +40,17 @@ class Item(models.Model):
 
 
 class Game(models.Model):
-    player = models.ForeignKey(User, related_name='player')
-    partner = models.ForeignKey(User, null=True, related_name='partner')
+    player = models.ForeignKey(User, related_name='player', on_delete=models.PROTECT)
+    partner = models.ForeignKey(User, null=True, related_name='partner', on_delete=models.PROTECT)
     creationDate = models.DateField()
     linkingCode = models.CharField(max_length=33)
     isPublic = models.BooleanField()
 
 
 class PlayerItem(models.Model):
-    user = models.ForeignKey(User)
-    game = models.ForeignKey(Game)
-    item = models.ForeignKey(Item)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    game = models.ForeignKey(Game, on_delete=models.PROTECT)
+    item = models.ForeignKey(Item, on_delete=models.PROTECT)
     quantity = models.IntegerField()
     upgradeQuantity = models.IntegerField()
 
@@ -72,8 +72,8 @@ class PlayerItem(models.Model):
 
 
 class UserGame(models.Model):
-    user = models.ForeignKey(User)
-    game = models.ForeignKey(Game)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    game = models.ForeignKey(Game, on_delete=models.PROTECT)
     wealth = models.BigIntegerField()
     mined = models.BigIntegerField(default=0)
     timePlayed = models.DurationField(
